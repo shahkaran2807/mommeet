@@ -1,14 +1,14 @@
 import SideBar from "../components/SideBar"
 
 async function getData(): Promise<ProductData[]> {
-  const res = await fetch("http://localhost:3000/api/products");
+  const res = await fetch("http://localhost:5000/api/products");
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
-  //   if (!res.ok) {
-  //     // This will activate the closest `error.js` Error Boundary
-  //     throw new Error("Failed to fetch data");
-  //   }
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error("Failed to fetch data");
+    }
 
   return res.json();
 }

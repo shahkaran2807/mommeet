@@ -11,7 +11,7 @@ const client = new Client({
 
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 
 app.get('/api/products', async (req, res) => {
     const pgRes = await client.query('SELECT * FROM products')
