@@ -23,6 +23,12 @@ app.post('/api/products/add', async (req, res) => {
     console.log(res)
 })
 
+app.get('/api/products/:category', async function(req , res){
+    const pgRes = await client.query(`SELECT * FROM products WHERE category = '${req.params.category}'`)
+    res.send(pgRes.rows)
+    res.status(200)
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
     client.connect(async function(err) {
