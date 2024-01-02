@@ -1,4 +1,7 @@
-import SideBar from "../../components/SideBar"
+import ImageContext from "@/app/components/ImageContext";
+import SideBar from "../../../components/SideBar"
+import { IKImage } from "imagekitio-react";
+import Link from "next/link";
 
 async function getData(category: string): Promise<ProductData[]> {
   let url = "";
@@ -20,10 +23,16 @@ async function getData(category: string): Promise<ProductData[]> {
 
 export const revalidate = 0
 
+const urlEndpoint = "https://ik.imagekit.io/m3c9xvobb";
+
 export type ProductData = {
-  product_id: number;
+  product_id: string;
   name: string;
   price: number;
+  category: string,
+  description: string,
+  seller_user_id: string,
+  images: string[]
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -37,12 +46,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <p className="pb-6 text-xs">All products</p>
                 <div className="flex gap-10 flex-wrap">
                     {data.map((item: ProductData, idx: number) => {
-                        return <div key={idx} className="flex flex-col shrink-0 w-64 md:w-36 hover:text-sky-500 hover:font-bold hover:cursor-pointer">
-                                <div className="h-36 bg-slate-300 rounded"></div>
+                        return <Link href={{pathname: "/products/"+item.product_id}} key={idx} className="flex flex-col shrink-0 w-64 md:w-36 hover:text-sky-500 hover:font-bold hover:cursor-pointer">
+                                {item.images && <img className="max-w-3xl max-h-3xl" src={item?.images[0]} />}
+                                {!item.images && <div className="h-36 bg-slate-300 rounded">
+                                </div>}
                                 <div>{item.name}</div>
                                 <div>{item.product_id}</div>
                                 <div>{"$" + item.price}</div>
-                            </div>
+                            </Link>
                     })}
                 </div>
             </div>
