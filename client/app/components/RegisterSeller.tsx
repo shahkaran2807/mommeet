@@ -18,7 +18,7 @@ export default function RegisterSeller({ user }: { user: User }) {
       user_id: user.id,
       username: user.username,
     };
-    fetch(`http://localhost:5000/api/listing/newseller`, {
+    fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/newseller`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export default function RegisterSeller({ user }: { user: User }) {
       .then((resJson) => {
         if (resJson.done) {
           setRegisterSuccess({ status: "done" });
-          redirect("/listing/new")
+          redirect("/listing/new/")
         } else {
           setRegisterSuccess({ status: "failed" });
         }

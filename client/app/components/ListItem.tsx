@@ -1,8 +1,10 @@
 "use client";
-import { IKImage, IKVideo, IKContext, IKUpload } from "imagekitio-react";
+import { IKImage, IKUpload } from "imagekitio-react";
 import ImageContext from "./ImageContext";
 import { useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { Calendar } from "@/components/ui/calendar";
+import { RedirectType, redirect } from "next/navigation";
 
 type UploadImageResponse = {
   fileId: string;
@@ -23,7 +25,7 @@ export default function ListItem() {
   const onSuccess = (res: UploadImageResponse) => {
     console.log("Success", res);
     setUploadedImages([...uploadedImages, res]);
-  }
+  };
 
   const itemListFormSubmit = (e: SubmitEvent) => {
     e.preventDefault();
@@ -33,9 +35,13 @@ export default function ListItem() {
       category: itemCategory.current.value,
       seller_user_id: user.id,
       description: itemDescription.current.value,
-      images: uploadedImages.map(imageUploadResponse => imageUploadResponse.url)
+      images: uploadedImages.map(
+        (imageUploadResponse) => imageUploadResponse.url
+      ),
+      listing_price: itemListingPrice.current.value,
+      unavailable_dates: unavailableDates.map(date => date.toISOString())
     };
-    fetch(`http://localhost:5000/api/listing/new`, {
+    fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,24 +50,21 @@ export default function ListItem() {
     })
       .then((res) => res.json())
       .then((resJson) => {
-        // if (resJson.done) {
-        //   setRegisterSuccess({ status: "done" });
-        //   redirect("/listing/new");
-        // } else {
-        //   setRegisterSuccess({ status: "failed" });
-        // }
-        console.log("Done")
+        console.log("Done");
+        redirect("/products/seller"+user.id+"/")
       })
       .catch((err) => console.error(err));
   };
   const [uploadedImages, setUploadedImages] = useState<UploadImageResponse[]>(
     []
   );
+  const [unavailableDates, setUnavailableDates] = useState<Date[] | undefined>([]);
   const { isLoaded, isSignedIn, user } = useUser();
   const itemName = useRef<HTMLInputElement>();
-  const itemPrice = useRef();
-  const itemCategory = useRef();
-  const itemDescription = useRef();
+  const itemPrice = useRef<HTMLInputElement>();
+  const itemListingPrice = useRef<HTMLInputElement>();
+  const itemCategory = useRef<HTMLInputElement>();
+  const itemDescription = useRef<HTMLInputElement>();
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -107,11 +110,12 @@ export default function ListItem() {
                 Item Name
               </label>
               <input
-                className="my-2 h-10 w-96 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
+                className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
                 id="itemName1"
                 aria-describedby="itemName"
                 placeholder="Enter item name"
                 ref={itemName}
+                required
               />
               <small className="block" id="itemName">
                 Enter a name of the item
@@ -122,15 +126,34 @@ export default function ListItem() {
                 Price
               </label>
               <input
-                className="my-2 h-10 w-96 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
+                className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
                 id="price1"
                 aria-describedby="price"
                 placeholder="Enter price"
                 type="number"
                 ref={itemPrice}
+                required
               />
-              <small className="block" id="itemName">
-                Enter the item price per day
+              <small className="block" id="price">
+                Enter the original retail price of item
+              </small>
+            </div>
+            <div className="p-3">
+              <label className="block" for="listingPrice1">
+                Listing Price
+              </label>
+              <input
+                className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
+                id="listingPrice1"
+                aria-describedby="listingPrice"
+                placeholder="Enter price"
+                type="number"
+                ref={itemListingPrice}
+                required
+              />{" "}
+              / day
+              <small className="block" id="listingPrice">
+                Enter price per day for the item
               </small>
             </div>
             <div className="p-3">
@@ -138,11 +161,12 @@ export default function ListItem() {
                 Category
               </label>
               <select
-                className="my-2 h-10 w-96 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
+                className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
                 id="category1"
                 name="category1"
                 aria-describedby="categoryHelp"
                 ref={itemCategory}
+                required
               >
                 <option>Select Category</option>
                 <option value="electronics">Electronics</option>
@@ -159,15 +183,32 @@ export default function ListItem() {
                 Item Description
               </label>
               <textarea
-                className="my-2 h-20 w-96 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
+                className="my-2 h-20 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
                 id="itemDescription1"
                 name="itemDescription1"
                 aria-describedby="itemDescriptionHelp"
                 ref={itemDescription}
-              >
-              </textarea>
+                required
+              ></textarea>
               <small className="block" id="itemDescriptionHelp">
                 Enter the description of the item
+              </small>
+            </div>
+            <div className="p-3">
+              <label className="block mb-2">Dates unavailable</label>
+              <div>
+                <Calendar
+                  mode="multiple"
+                  selected={unavailableDates}
+                  onSelect={setUnavailableDates}
+                  disabled={(date) =>
+                    date <= new Date() || date > new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+                  }
+                  className="rounded-md border w-64"
+                />
+              </div>
+              <small className="block">
+                Please enter the dates when the item will not be available.
               </small>
             </div>
             <button className="bg-sky-500 text-gray-50 font-bold p-2 rounded my-10">

@@ -10,49 +10,34 @@ import {
 import { ProductData } from "../category/[slug]/page";
 import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
 import useSWR from "swr";
+import { useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
+import Link from "next/link";
 
 const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
 
 export default function Page({ params }: { params: { product_id: string } }) {
-  let productData: ProductData;
-  let usingSearchParams = false;
-  //   if (
-  //     searchParams.has("product_id") &&
-  //     searchParams.has("name") &&
-  //     searchParams.has("price") &&
-  //     searchParams.has("category") &&
-  //     searchParams.has("description") &&
-  //     searchParams.has("seller_user_id") &&
-  //     searchParams.has("images")
-  //   ) {
-  //     usingSearchParams = true;
-  //     productData = {
-  //       product_id: searchParams.get("product_id"),
-  //       name: searchParams.get("name"),
-  //       price: parseInt(searchParams.get("price")),
-  //       category: searchParams.get("category"),
-  //       description: searchParams.get("description"),
-  //       seller_user_id: searchParams.get("seller_user_id"),
-  //       images: searchParams.getAll("images"),
-  //     };
-  //   } else {
-  // }
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
-    "http://localhost:5000/api/product/" + params.product_id,
+    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/product/` + params.product_id,
     fetcher
   );
 
+  const [selectedDates, setSelectedDates] = useState<Date[]>();
+
   return (
     <div>
-      <div className="flex flex-row gap-12">
-        <div className="w-2/4">
+      <div className="flex flex-col md:flex-row md:gap-12">
+        <div className="mb-24 md:w-2/4">
           <Carousel>
             <CarouselContent>
               {!isLoading ? (
                 data[0].images.map((image, idx) => {
                   return (
-                    <CarouselItem key={image + idx}>
-                      <img src={image} />
+                    <CarouselItem
+                      key={image + idx}
+                      className="w-96 h-80 rounded border"
+                    >
+                      <img src={image} className="object-cover" />
                     </CarouselItem>
                   );
                 })
@@ -70,12 +55,30 @@ export default function Page({ params }: { params: { product_id: string } }) {
             <div className="text-xs text-slate-400 mb-2">
               {data[0].product_id}
             </div>
-            <div className="mb-6">{data[0].description}</div>
-            <div className="text-4xl font-semibold">
-              {"$" + data[0].price + "/day"}
+            <div className="mb-6 max-h-36 w-96 overflow-y-auto">
+              {data[0].description}
             </div>
-            <div className="text-sm">
-              Original Price: {"$" + data[0].price}
+            <div className="text-4xl font-semibold">
+              {"$" + data[0].listing_price + "/day"}
+            </div>
+            <div className="text-sm mb-5">Original Price: {"$" + data[0].price}</div>
+            <div>Listed By: <Link href={"/products/seller/"+data[0].seller_user_id} className="text-sky-500">{data[0].seller_user_id}</Link></div>
+            <div className="mt-12">
+              <div>
+                <Calendar
+                  mode="multiple"
+                  selected={selectedDates}
+                  onSelect={setSelectedDates}
+                  disabled={(date) => {
+                    return date < new Date() ||
+                      data[0].unavailable_dates.includes(date.toISOString())
+                  }}
+                  className="rounded-md border w-64"
+                />
+              </div>
+              <small className="block">
+                Please enter the dates when the item will not be available.
+              </small>
             </div>
           </div>
         ) : (

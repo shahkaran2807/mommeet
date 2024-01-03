@@ -14,8 +14,9 @@ export default function Page() {
   }
 
   if (isLoaded) {
+    console.log(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/verify/${user.id}`)
     const { data, error, isLoading, isValidating } = useSWR(
-      `http://localhost:5000/api/listing/verify/${user.id}`,
+      `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/verify/${user.id}`,
       fetcher
     );
     return (

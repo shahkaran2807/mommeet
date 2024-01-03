@@ -34,6 +34,21 @@ app.use((req, res, next) => {
   next();
 });
 
+const convertToPSQLArray = (arr, addQuotes, braceTypeOpen, braceTypeClose, quotes) => {
+  if (!addQuotes) {
+    quotes = ``;
+  }
+  let arrString = braceTypeOpen;
+  const lastArrElement = arr.pop();
+  arr.forEach((element) => {
+    arrString += (quotes + element + quotes);
+    arrString += ", ";
+  });
+  arrString += (quotes + lastArrElement + quotes);
+  arrString += braceTypeClose;
+  return arrString
+};
+
 app.get("/api/imageauth", function (req, res) {
   var result = imagekit.getAuthenticationParameters();
   res.send(result);
@@ -82,6 +97,19 @@ app.post("/api/listing/newseller", async function (req, res) {
   }
 });
 
+app.get("/api/listing/:seller_id", async function (req, res) {
+  const pgRes = await client.query(
+    `SELECT * FROM sellers WHERE user_id = '${req.params.seller_id}'`
+  );
+  const sellerProducts = pgRes.rows[0].products
+  const sellerProductsString = convertToPSQLArray(sellerProducts, true, "(", ")", `'`);
+  const productsRes = await client.query(
+    `SELECT * FROM products WHERE product_id IN ${sellerProductsString}`
+  );
+  res.send({'seller': pgRes.rows, 'products': productsRes.rows});
+  res.status(200);
+})
+
 app.post("/api/listing/new", async (req, res) => {
   let {
     name,
@@ -93,24 +121,17 @@ app.post("/api/listing/new", async (req, res) => {
     listing_price,
     unavailable_dates,
   } = req.body;
-  const convertToPSQLArray = (arr, addQuotes) => {
-    let imagesString = "{";
-    const lastImageUrl = images.pop();
-    images.forEach((element) => {
-      imagesString += `"` + element + `"`;
-      imagesString += ", ";
-    });
-    imagesString += `"` + lastImageUrl + `"`;
-    imagesString += "}";
-  };
+  const imagesString = convertToPSQLArray(images, true, "{", "}", '"')
+  const datesString = convertToPSQLArray(unavailable_dates, false, "{", "}", '"')
+
   try {
     const genRandomUuid = await client.query("SELECT * FROM gen_random_uuid()");
     const generatedUuid = genRandomUuid.rows[0].gen_random_uuid;
-    console.log(
-      `INSERT INTO products(name, price, category, description, seller_user_id, product_id, images) VALUES ('${name}', ${price}, '${category}', '${description}', '${seller_user_id}', '${generatedUuid}', '${imagesString}')`
-    );
+    // console.log(
+    //   `INSERT INTO products(name, price, category, description, seller_user_id, product_id, images, listing_price, unavailable_dates) VALUES ('${name}', ${price}, '${category}', '${description}', '${seller_user_id}', '${generatedUuid}', '${imagesString}', ${listing_price}, '${datesString}')`
+    // );
     const pgResInsert = await client.query(
-      `INSERT INTO products(name, price, category, description, seller_user_id, product_id, images) VALUES ('${name}', ${price}, '${category}', '${description}', '${seller_user_id}', '${generatedUuid}', '${imagesString}')`
+      `INSERT INTO products(name, price, category, description, seller_user_id, product_id, images, listing_price, unavailable_dates) VALUES ('${name}', ${price}, '${category}', '${description}', '${seller_user_id}', '${generatedUuid}', '${imagesString}', ${listing_price}, '${datesString}')`
     );
     const pgRegUpdate = await client.query(
       `UPDATE sellers SET products = array_append(products, '${generatedUuid}') WHERE user_id = '${seller_user_id}';`

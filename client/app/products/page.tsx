@@ -1,7 +1,8 @@
 import SideBar from "../components/SideBar"
+import { ProductData } from "./category/[slug]/page";
 
 async function getData(): Promise<ProductData[]> {
-  const res = await fetch("http://localhost:5000/api/products");
+  const res = await fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/products`);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -14,12 +15,6 @@ async function getData(): Promise<ProductData[]> {
 }
 
 export const revalidate = 0
-
-export type ProductData = {
-  product_id: number;
-  name: string;
-  price: number;
-};
 
 export default async function Products() {
   const data: ProductData[] = await getData();

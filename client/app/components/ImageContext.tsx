@@ -4,7 +4,7 @@ const urlEndpoint = "https://ik.imagekit.io/m3c9xvobb";
 const publicKey = "public_QL/BnOFxsLrH4K4HBhyDyw8hWWM=";
 const authenticator = async () => {
   try {
-    const response = await fetch("http://localhost:5000/api/imageauth");
+    const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/imageauth`);
 
     if (!response.ok) {
       const errorText = await response.text();

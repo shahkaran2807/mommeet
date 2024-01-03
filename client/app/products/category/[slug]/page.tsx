@@ -1,6 +1,6 @@
 import ImageContext from "@/app/components/ImageContext";
-import SideBar from "../../../components/SideBar"
 import { IKImage } from "imagekitio-react";
+import SideBar from "../../../components/SideBar"
 import Link from "next/link";
 
 async function getData(category: string): Promise<ProductData[]> {
@@ -8,7 +8,7 @@ async function getData(category: string): Promise<ProductData[]> {
   if (category != "all") {
     url = "/" + category;
   }
-  let fetchUrl = "http://localhost:5000/api/products" + url
+  let fetchUrl = `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/products` + url
   const res = await fetch(fetchUrl);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -32,7 +32,9 @@ export type ProductData = {
   category: string,
   description: string,
   seller_user_id: string,
-  images: string[]
+  images: string[],
+  listing_price: number,
+  unavailable_dates: Date[]
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {
