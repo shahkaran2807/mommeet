@@ -34,19 +34,25 @@ app.use((req, res, next) => {
   next();
 });
 
-const convertToPSQLArray = (arr, addQuotes, braceTypeOpen, braceTypeClose, quotes) => {
+const convertToPSQLArray = (
+  arr,
+  addQuotes,
+  braceTypeOpen,
+  braceTypeClose,
+  quotes
+) => {
   if (!addQuotes) {
     quotes = ``;
   }
   let arrString = braceTypeOpen;
   const lastArrElement = arr.pop();
   arr.forEach((element) => {
-    arrString += (quotes + element + quotes);
+    arrString += quotes + element + quotes;
     arrString += ", ";
   });
-  arrString += (quotes + lastArrElement + quotes);
+  arrString += quotes + lastArrElement + quotes;
   arrString += braceTypeClose;
-  return arrString
+  return arrString;
 };
 
 app.get("/api/imageauth", function (req, res) {
@@ -101,14 +107,20 @@ app.get("/api/listing/:seller_id", async function (req, res) {
   const pgRes = await client.query(
     `SELECT * FROM sellers WHERE user_id = '${req.params.seller_id}'`
   );
-  const sellerProducts = pgRes.rows[0].products
-  const sellerProductsString = convertToPSQLArray(sellerProducts, true, "(", ")", `'`);
+  const sellerProducts = pgRes.rows[0].products;
+  const sellerProductsString = convertToPSQLArray(
+    sellerProducts,
+    true,
+    "(",
+    ")",
+    `'`
+  );
   const productsRes = await client.query(
     `SELECT * FROM products WHERE product_id IN ${sellerProductsString}`
   );
-  res.send({'seller': pgRes.rows, 'products': productsRes.rows});
+  res.send({ seller: pgRes.rows, products: productsRes.rows });
   res.status(200);
-})
+});
 
 app.post("/api/listing/new", async (req, res) => {
   let {
@@ -121,8 +133,14 @@ app.post("/api/listing/new", async (req, res) => {
     listing_price,
     unavailable_dates,
   } = req.body;
-  const imagesString = convertToPSQLArray(images, true, "{", "}", '"')
-  const datesString = convertToPSQLArray(unavailable_dates, false, "{", "}", '"')
+  const imagesString = convertToPSQLArray(images, true, "{", "}", '"');
+  const datesString = convertToPSQLArray(
+    unavailable_dates,
+    false,
+    "{",
+    "}",
+    '"'
+  );
 
   try {
     const genRandomUuid = await client.query("SELECT * FROM gen_random_uuid()");

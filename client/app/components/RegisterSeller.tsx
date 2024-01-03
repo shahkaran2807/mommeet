@@ -1,19 +1,20 @@
 "use client";
 import { User } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
-export default function RegisterSeller({ user }: { user: User }) {
+export default function RegisterSeller({ user }: { user: any }) {
   const [registerSuccess, setRegisterSuccess] = useState({
     status: "uninitiated",
   });
+  const router = useRouter();
   const registerSeller = () => {
     setRegisterSuccess({ status: "waiting" });
     const data = {
       name: (user.firstName || "") + (user.lastName || ""),
       email: user.emailAddresses.filter(
-        (emailAddress) => emailAddress.id === user.primaryEmailAddressId
+        (emailAddress: any) => emailAddress.id === user.primaryEmailAddressId
       )[0].emailAddress,
       user_id: user.id,
       username: user.username,
@@ -29,7 +30,7 @@ export default function RegisterSeller({ user }: { user: User }) {
       .then((resJson) => {
         if (resJson.done) {
           setRegisterSuccess({ status: "done" });
-          redirect("/listing/new/")
+          router.push("/listing/new/");
         } else {
           setRegisterSuccess({ status: "failed" });
         }

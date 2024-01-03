@@ -1,10 +1,11 @@
 "use client";
 import { IKImage, IKUpload } from "imagekitio-react";
 import ImageContext from "./ImageContext";
-import { useRef, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Calendar } from "@/components/ui/calendar";
 import { RedirectType, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type UploadImageResponse = {
   fileId: string;
@@ -27,7 +28,9 @@ export default function ListItem() {
     setUploadedImages([...uploadedImages, res]);
   };
 
-  const itemListFormSubmit = (e: SubmitEvent) => {
+  const router = useRouter();
+
+  const itemListFormSubmit: any = (e: SubmitEvent) => {
     e.preventDefault();
     const data = {
       name: itemName.current.value,
@@ -51,7 +54,7 @@ export default function ListItem() {
       .then((res) => res.json())
       .then((resJson) => {
         console.log("Done");
-        redirect("/products/seller"+user.id+"/")
+        router.push("/products/seller"+user.id+"/")
       })
       .catch((err) => console.error(err));
   };
@@ -60,11 +63,11 @@ export default function ListItem() {
   );
   const [unavailableDates, setUnavailableDates] = useState<Date[] | undefined>([]);
   const { isLoaded, isSignedIn, user } = useUser();
-  const itemName = useRef<HTMLInputElement>();
-  const itemPrice = useRef<HTMLInputElement>();
-  const itemListingPrice = useRef<HTMLInputElement>();
-  const itemCategory = useRef<HTMLInputElement>();
-  const itemDescription = useRef<HTMLInputElement>();
+  const itemName = useRef<HTMLInputElement>() as any;
+  const itemPrice = useRef<HTMLInputElement>() as any;
+  const itemListingPrice = useRef<HTMLInputElement>() as any;
+  const itemCategory = useRef<HTMLInputElement>() as any;
+  const itemDescription = useRef<HTMLInputElement>() as any;
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -81,6 +84,7 @@ export default function ListItem() {
                 uploadedImages.map((img, idx) => {
                   return (
                     <IKImage
+                      key={img.fileId}
                       urlEndpoint={urlEndpoint}
                       path={img.filePath}
                       width={400}
@@ -106,7 +110,7 @@ export default function ListItem() {
         <div className="">
           <form onSubmit={itemListFormSubmit}>
             <div className="p-3">
-              <label className="block" for="itemName1">
+              <label className="block" htmlFor="itemName1">
                 Item Name
               </label>
               <input
@@ -122,7 +126,7 @@ export default function ListItem() {
               </small>
             </div>
             <div className="p-3">
-              <label className="block" for="price1">
+              <label className="block" htmlFor="price1">
                 Price
               </label>
               <input
@@ -139,7 +143,7 @@ export default function ListItem() {
               </small>
             </div>
             <div className="p-3">
-              <label className="block" for="listingPrice1">
+              <label className="block" htmlFor="listingPrice1">
                 Listing Price
               </label>
               <input
@@ -157,7 +161,7 @@ export default function ListItem() {
               </small>
             </div>
             <div className="p-3">
-              <label className="block" for="category1">
+              <label className="block" htmlFor="category1">
                 Category
               </label>
               <select
@@ -179,7 +183,7 @@ export default function ListItem() {
               </small>
             </div>
             <div className="p-3">
-              <label className="block" for="itemDescription1">
+              <label className="block" htmlFor="itemDescription1">
                 Item Description
               </label>
               <textarea

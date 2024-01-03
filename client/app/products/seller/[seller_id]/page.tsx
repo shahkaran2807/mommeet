@@ -4,8 +4,9 @@ import useSWR from "swr";
 import { ProductData } from "../../category/[slug]/page";
 import SideBar from "@/app/components/SideBar";
 import Link from "next/link";
+import Image from "next/image";
 
-const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+const fetcher = (...args: any) => fetch.apply(null, args).then((res) => res.json());
 
 export default function Page({ params }: { params: { seller_id: string } }) {
   const { data, error, isLoading, isValidating } = useSWR(
@@ -22,7 +23,7 @@ export default function Page({ params }: { params: { seller_id: string } }) {
             <SideBar />
           </div>
           <div>
-            <p className="pb-6 text-xs">{data.seller[0].name}'s products</p>
+            <p className="pb-6 text-xs">{data.seller[0].name}&apos;s products</p>
             <div className="flex gap-10 flex-wrap">
               {data.products.map((item: ProductData, idx: number) => {
                 return (
@@ -32,9 +33,10 @@ export default function Page({ params }: { params: { seller_id: string } }) {
                     className="flex flex-col shrink-0 w-64 md:w-36 hover:text-sky-500 hover:font-bold hover:cursor-pointer"
                   >
                     {item.images && (
-                      <img
+                      <Image
                         className="max-w-3xl max-h-3xl"
                         src={item?.images[0]}
+                        alt={item.name}
                       />
                     )}
                     {!item.images && (

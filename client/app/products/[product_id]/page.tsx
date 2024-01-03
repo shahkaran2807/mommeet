@@ -13,8 +13,9 @@ import useSWR from "swr";
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
+import Image from "next/image";
 
-const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+const fetcher = (...args: any) => fetch.apply(null, args).then((res) => res.json());
 
 export default function Page({ params }: { params: { product_id: string } }) {
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
@@ -37,7 +38,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
                       key={image + idx}
                       className="w-96 h-80 rounded border"
                     >
-                      <img src={image} className="object-cover" />
+                      <Image alt={image} src={image} className="object-cover" fill={true}/>
                     </CarouselItem>
                   );
                 })

@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function HeaderNav() {
   const user = await currentUser();
@@ -29,7 +30,7 @@ export default async function HeaderNav() {
         <div className="h-6 w-6 border-1 rounded">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <img src={user.imageUrl} />
+              <Image alt={user.username} src={user.imageUrl} height={80} width={80} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuItem>
