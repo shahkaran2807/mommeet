@@ -1,4 +1,4 @@
-import { UserButton, currentUser } from "@clerk/nextjs";
+import { SignOutButton, UserButton, currentUser } from "@clerk/nextjs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,10 +43,7 @@ export default async function HeaderNav() {
                   Manage Account
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  Sign Out
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Settings
+                  <SignOutButton>Sign Out</SignOutButton>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
