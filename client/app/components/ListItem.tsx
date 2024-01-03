@@ -54,7 +54,7 @@ export default function ListItem() {
       .then((res) => res.json())
       .then((resJson) => {
         console.log("Done");
-        router.push("/products/seller"+user.id+"/")
+        router.push("/products/seller/"+user.id+"/")
       })
       .catch((err) => console.error(err));
   };
