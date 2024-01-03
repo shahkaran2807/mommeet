@@ -1,6 +1,7 @@
 "use client";
 import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
 import RegisterSeller from "@/app/components/RegisterSeller";
+import SellerForm from "@/app/components/SellerForm/SellerForm";
 import { useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import useSWR from "swr";

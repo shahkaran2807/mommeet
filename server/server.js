@@ -19,7 +19,7 @@ const imagekit = new ImageKit({
 
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = 5001;
 
 app.use(express.json());
 
@@ -91,11 +91,11 @@ app.get("/api/listing/verify/:userid", async function (req, res) {
 });
 
 app.post("/api/listing/newseller", async function (req, res) {
-  let { name, email, user_id, username } = req.body;
+  let { name, email, user_id, username, phonenumber, address } = req.body;
   if (name === "") name = username;
   try {
     const pgRes = await client.query(
-      `INSERT INTO sellers(name, email, user_id, username) VALUES ('${name}', '${email}', '${user_id}', '${username}')`
+      `INSERT INTO sellers(name, email, user_id, username, phonenumber, address) VALUES ('${name}', '${email}', '${user_id}', '${username}', '${phonenumber}', '${address}')`
     );
     res.send({ done: true });
   } catch (err) {
@@ -121,6 +121,14 @@ app.get("/api/listing/:seller_id", async function (req, res) {
   res.send({ seller: pgRes.rows, products: productsRes.rows });
   res.status(200);
 });
+
+app.get("/api/sellerinfo/:seller_id", async function (req, res) {
+  const pgRes = await client.query(
+    `SELECT * FROM sellers WHERE user_id = '${req.params.seller_id}'`
+  );
+  res.send(pgRes.rows);
+  res.status(200);
+})
 
 app.post("/api/listing/new", async (req, res) => {
   let {
@@ -166,5 +174,6 @@ app.listen(port, () => {
   client.connect(async function (err) {
     if (err) throw err;
     console.log("Connected!");
+    
   });
 });
