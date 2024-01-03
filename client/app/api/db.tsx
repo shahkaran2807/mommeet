@@ -42,6 +42,16 @@ export async function connectToDatabase() {
     await ((global as unknown) as Global).db.client.connect(async function (err: any) {
       if (err) throw err;
       console.log("Connected!");
+      // await ((global as unknown) as Global).db.client.query(
+      //   `CREATE TABLE public.feedback
+      //   (
+      //       id serial,
+      //       email text,
+      //       phonenumber text,
+      //       feedback text,
+      //       PRIMARY KEY (id)
+      //   );`
+      // );
     });
   }
   if (!((global as unknown) as Global).db.imagekit) {

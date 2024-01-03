@@ -12,19 +12,21 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"
 import { useUser } from "@clerk/nextjs";
 
 const fetcher = (...args: any) =>
   fetch.apply(null, args).then((res) => res.json());
 
 export default function Page({ params }: { params: { product_id: string } }) {
+
   const { isSignedIn, user, isLoaded } = useUser();
 
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
-    `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/product/` + params.product_id,
+    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/product/` + params.product_id,
+
     fetcher
   );
 
@@ -50,6 +52,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
       sellerData();
     }
   }, [data, isLoading]);
+  
 
   const [selectedDates, setSelectedDates] = useState<Date[]>();
 
@@ -73,6 +76,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
   };
 
   return (
+    
     <div>
       <div className="flex flex-col md:flex-row md:gap-12">
         <div className="mb-24 md:w-2/4">
@@ -142,18 +146,19 @@ export default function Page({ params }: { params: { product_id: string } }) {
                   }}
                   className="rounded-md border w-64"
                 />
+                
               </div>
-              <small className="block">Please select your rental dates</small>
+              <small className="block">
+                Please select your rental dates
+              </small>
+            </div>
+           
+            <div className="container mx-auto my-4">
+                <button className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold" onClick={handleWhatsAppRedirect}>
+                  Request on WhatsApp
+                </button>
             </div>
 
-            <div className="container mx-auto my-4">
-              <button
-                className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold"
-                onClick={handleWhatsAppRedirect}
-              >
-                Request on WhatsApp
-              </button>
-            </div>
           </div>
         ) : (
           <LoadingSpinner />
