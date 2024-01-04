@@ -19,7 +19,7 @@ export default function RegisterSeller({ user }: { user: any }) {
       user_id: user.id,
       username: user.username,
     };
-    fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/newseller`, {
+    fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/newseller`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

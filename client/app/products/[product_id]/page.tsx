@@ -19,7 +19,7 @@ const fetcher = (...args: any) => fetch.apply(null, args).then((res) => res.json
 
 export default function Page({ params }: { params: { product_id: string } }) {
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
-    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/product/` + params.product_id,
+    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/product/` + params.product_id,
     fetcher
   );
 

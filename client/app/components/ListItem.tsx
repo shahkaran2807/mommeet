@@ -44,7 +44,7 @@ export default function ListItem() {
       listing_price: itemListingPrice.current.value,
       unavailable_dates: unavailableDates.map(date => date.toISOString())
     };
-    fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/new`, {
+    fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

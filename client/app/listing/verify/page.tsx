@@ -15,7 +15,7 @@ export default function Page() {
   
   if (isLoaded) {
     const { data, error, isLoading, isValidating } = useSWR(
-      `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/listing/verify/${user.id}`,
+      `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/verify/${user.id}`,
       fetcher
       );
       const [verifySuccess, setVerifySuccess] = useState({
