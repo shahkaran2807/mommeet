@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     url = "/" + params.slug;
   }
   const { data, error, isLoading, isValidating } = useSWR(
-    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/products/${url}`,
+    `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/products/${url}`,
     fetcher
   );
   return (

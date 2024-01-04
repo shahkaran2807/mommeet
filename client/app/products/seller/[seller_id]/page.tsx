@@ -11,7 +11,7 @@ const fetcher = (...args: any) =>
 
 export default function Page({ params }: { params: { seller_id: string } }) {
   const { data, error, isLoading, isValidating } = useSWR(
-    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/${params.seller_id}`,
+    `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/${params.seller_id}`,
     fetcher
   );
   return (

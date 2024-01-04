@@ -9,7 +9,7 @@ const fetcher = (...args: any) =>
 
 export default function Products() {
   const { data, error, isLoading, isValidating } = useSWR(
-    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/products`,
+    `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/products`,
     fetcher
   );
   return (
