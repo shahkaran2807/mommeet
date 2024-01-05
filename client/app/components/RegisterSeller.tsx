@@ -1,15 +1,15 @@
 "use client";
-import { User } from "@clerk/nextjs/server";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+import SellerForm from "./SellerForm/SellerForm";
 
 export default function RegisterSeller({ user }: { user: any }) {
   const [registerSuccess, setRegisterSuccess] = useState({
     status: "uninitiated",
   });
   const router = useRouter();
-  const registerSeller = () => {
+  const registerSeller = (phoneNumber: string, address: string) => {
     setRegisterSuccess({ status: "waiting" });
     const data = {
       name: (user.firstName || "") + (user.lastName || ""),
@@ -18,6 +18,8 @@ export default function RegisterSeller({ user }: { user: any }) {
       )[0].emailAddress,
       user_id: user.id,
       username: user.username,
+      phonenumber: phoneNumber,
+      address: address
     };
     fetch(`${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/newseller`, {
       method: "POST",
@@ -39,20 +41,20 @@ export default function RegisterSeller({ user }: { user: any }) {
   };
   return (
     <div>
+     
       {
         {
           uninitiated: (
             <span
               className="text-sky-500 hover:text-sky-700 cursor-pointer"
-              onClick={registerSeller}
             >
-              Registering as seller
+               <SellerForm onSubmit={registerSeller}/>
             </span>
           ),
           failed: (
             <span
               className="text-sky-500 hover:text-sky-700 cursor-pointer"
-              onClick={registerSeller}
+              onClick={registerSeller as any}
             >
               Try Again
             </span>
