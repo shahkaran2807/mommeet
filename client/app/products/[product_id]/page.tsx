@@ -6,7 +6,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-// import { useSearchParams } from "next/navigation";
 import { ProductData } from "../category/[slug]/page";
 import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
 import useSWR from "swr";
@@ -25,8 +24,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
-    `http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/product/` + params.product_id,
-
+    `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/product/` + params.product_id,
     fetcher
   );
 
@@ -37,10 +35,9 @@ export default function Page({ params }: { params: { product_id: string } }) {
       const sellerData = async () => {
         try {
           // Replace with your second request logic
-          const response = await fetch(`http://${process.env.NEXT_PUBLIC_HOST_ADDRESS}:${process.env.NEXT_PUBLIC_HOST_PORT}/api/sellerinfo/`+data[0].seller_user_id);
+          const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/sellerinfo/`+data[0].seller_user_id);
           const result = await response.json();
           setPhoneNumber(result[0].phonenumber)
-          console.log('sellerrr: ', result[0].phonenumber)
         } catch (error) {
           // Handle any errors from the second request
           console.error('Error in seller request:', error);
