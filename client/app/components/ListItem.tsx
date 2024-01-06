@@ -42,7 +42,7 @@ export default function ListItem() {
         (imageUploadResponse) => imageUploadResponse.url
       ),
       listing_price: itemListingPrice.current.value,
-      unavailable_dates: unavailableDates.map(date => date.toISOString())
+      unavailable_dates: unavailableDates.map(date => date.toISOString().slice(0, 10))
     };
     fetch(`${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/listing/new`, {
       method: "POST",

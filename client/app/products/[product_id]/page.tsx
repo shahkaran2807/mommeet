@@ -32,7 +32,6 @@ export default function Page({ params }: { params: { product_id: string } }) {
     if (data && !isLoading) {
       // The first request is successfully completed
       // Now, make the second request here
-      console.log(data)
       const sellerData = async () => {
         try {
           // Replace with your second request logic
@@ -136,10 +135,9 @@ export default function Page({ params }: { params: { product_id: string } }) {
                     setSelectedDates(dates);
                   }}
                   disabled={(date) => {
-                    console.log(date.toISOString())
                     return (
                       date < new Date() ||
-                      data[0].unavailable_dates.includes(date.toISOString())
+                      data[0].unavailable_dates.some(unavailable_date => unavailable_date.slice(0, 10) == date.toISOString().slice(0, 10))
                     );
                   }}
                   className="rounded-md border w-64"
