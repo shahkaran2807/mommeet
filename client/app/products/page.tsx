@@ -8,7 +8,6 @@ const fetcher = (...args: any) =>
   fetch.apply(null, args).then((res) => res.json());
 
 export default function Products() {
-  console.log(`${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/products`)
   const { data, error, isLoading, isValidating } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/products`,
     fetcher

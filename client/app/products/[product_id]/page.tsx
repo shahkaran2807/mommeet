@@ -9,19 +9,19 @@ import {
 import { ProductData } from "../category/[slug]/page";
 import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
 import useSWR from "swr";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 
-const fetcher = (...args: any) => fetch.apply(null, args).then((res) => res.json());
+const fetcher = (...args: any) =>
+  fetch.apply(null, args).then((res) => res.json());
 
 export default function Page({ params }: { params: { product_id: string } }) {
-
   const { isSignedIn, user, isLoaded } = useUser();
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
     `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/product/` + params.product_id,
@@ -32,37 +32,48 @@ export default function Page({ params }: { params: { product_id: string } }) {
     if (data && !isLoading) {
       // The first request is successfully completed
       // Now, make the second request here
+      console.log(data)
       const sellerData = async () => {
         try {
           // Replace with your second request logic
-          const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/sellerinfo/`+data[0].seller_user_id);
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_HOST_ADDRESS}/api/sellerinfo/` +
+              data[0].seller_user_id
+          );
           const result = await response.json();
-          setPhoneNumber(result[0].phonenumber)
+          setPhoneNumber(result[0].phonenumber);
         } catch (error) {
           // Handle any errors from the second request
-          console.error('Error in seller request:', error);
+          console.error("Error in seller request:", error);
         }
       };
 
       sellerData();
     }
   }, [data, isLoading]);
-  
 
   const [selectedDates, setSelectedDates] = useState<Date[]>();
-  
 
-const handleWhatsAppRedirect = () => {
-  if (isLoaded) {
-    const encodedPhoneNumber = encodeURIComponent(phoneNumber.replace(/[\s\-\[\]()]/g, ''))
-    const message = `Hi! I am ${user.firstName}, I'm interested in renting out your ${data[0].name} for dates ${selectedDates.map(date => date.toLocaleString().split(',')[0])}. Please let me know the best time for pickup. Thanks!`
-    const chatLink = `https://wa.me/${encodedPhoneNumber}?text=${encodeURIComponent(message)}`
-    window.location.href = chatLink
-  }
-}
+  const handleWhatsAppRedirect = () => {
+    if (isLoaded) {
+      const encodedPhoneNumber = encodeURIComponent(
+        phoneNumber.replace(/[\s\-\[\]()]/g, "")
+      );
+      const message = `Hi! I am ${
+        user.firstName
+      }, I'm interested in renting out your ${
+        data[0].name
+      } for dates ${selectedDates.map(
+        (date) => date.toLocaleString().split(",")[0]
+      )}. Please let me know the best time for pickup. Thanks!`;
+      const chatLink = `https://wa.me/${encodedPhoneNumber}?text=${encodeURIComponent(
+        message
+      )}`;
+      window.location.href = chatLink;
+    }
+  };
 
   return (
-    
     <div>
       <div className="flex flex-col md:flex-row md:gap-12">
         <div className="mb-24 md:w-2/4">
@@ -75,7 +86,12 @@ const handleWhatsAppRedirect = () => {
                       key={image + idx}
                       className="w-96 h-80 rounded border"
                     >
-                      <Image alt={image} src={image} className="object-cover" fill={true}/>
+                      <Image
+                        alt={image}
+                        src={image}
+                        className="object-cover"
+                        fill={true}
+                      />
                     </CarouselItem>
                   );
                 })
@@ -99,33 +115,46 @@ const handleWhatsAppRedirect = () => {
             <div className="text-4xl font-semibold">
               {"$" + data[0].listing_price + "/day"}
             </div>
-            <div className="text-sm mb-5">Original Price: {"$" + data[0].price}</div>
-            <div>Listed By: <Link href={"/products/seller/"+data[0].seller_user_id} className="text-sky-500">{data[0].seller_user_id}</Link></div>
+            <div className="text-sm mb-5">
+              Original Price: {"$" + data[0].price}
+            </div>
+            <div>
+              Listed By:{" "}
+              <Link
+                href={"/products/seller/" + data[0].seller_user_id}
+                className="text-sky-500"
+              >
+                {data[0].seller_user_id}
+              </Link>
+            </div>
             <div className="mt-12">
               <div>
                 <Calendar
                   mode="multiple"
                   selected={selectedDates}
-                  onSelect={(dates) => { setSelectedDates(dates);}}
+                  onSelect={(dates) => {
+                    setSelectedDates(dates);
+                  }}
                   disabled={(date) => {
-                    return date < new Date() ||
+                    return (
+                      date < new Date() ||
                       data[0].unavailable_dates.includes(date.toISOString())
+                    );
                   }}
                   className="rounded-md border w-64"
                 />
-                
               </div>
-              <small className="block">
-                Please select your rental dates
-              </small>
-            </div>
-           
-            <div className="container mx-auto my-4">
-                <button className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold" onClick={handleWhatsAppRedirect}>
-                  Request on WhatsApp
-                </button>
+              <small className="block">Please select your rental dates</small>
             </div>
 
+            <div className="container mx-auto my-4">
+              <button
+                className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold"
+                onClick={handleWhatsAppRedirect}
+              >
+                Request on WhatsApp
+              </button>
+            </div>
           </div>
         ) : (
           <LoadingSpinner />
