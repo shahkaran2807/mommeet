@@ -136,6 +136,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
                     setSelectedDates(dates);
                   }}
                   disabled={(date) => {
+                    console.log(date.toISOString())
                     return (
                       date < new Date() ||
                       data[0].unavailable_dates.includes(date.toISOString())
