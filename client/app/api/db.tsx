@@ -1,9 +1,8 @@
+import ImageKit from "imagekit";
 const { Client } = require("pg");
-const ImageKit = require("imagekit");
 
 type Global = {
-    db: typeof Client,
-    imagekit: typeof ImageKit
+    db: { client: typeof Client, imagekit: ImageKit }
 }
 if (!((global as unknown) as Global).db) {
   ((global as unknown) as Global).db = { client: null, imagekit: null };
