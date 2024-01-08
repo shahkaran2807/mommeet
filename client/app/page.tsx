@@ -1,4 +1,6 @@
+"use client"
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 
 const categories = [
   {
@@ -23,6 +25,8 @@ const categories = [
   }
 ];
 export default function Home() {
+  const router = useRouter();
+  router.push("/listing/new")
   return (
     <main className="flex flex-wrap gap-10">
       {categories.map((category, idx) => {
