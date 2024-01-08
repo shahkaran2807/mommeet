@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import HeaderNav from "./components/HeaderNav";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +21,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <div className="flex flex-col h-screen px-8 sm:px-36">
+          <div className="flex flex-col min-h-screen px-8 sm:px-36">
             <HeaderNav />
             {children}
           </div>
+          <Footer/>
         </body>
       </html>
     </ClerkProvider>
