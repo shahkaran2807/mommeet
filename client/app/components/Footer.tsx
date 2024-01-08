@@ -63,7 +63,7 @@ export default function Footer() {
                 name="email"
                 id="email"
                 placeholder="Email"
-                className="border rounded px-2 py-1 mr-2"
+                className="border rounded px-2 py-1 mr-2 text-slate-800"
                 required
               />
             </div>
@@ -77,7 +77,7 @@ export default function Footer() {
                 name="phoneNumber"
                 id="phoneNumber"
                 placeholder="Phone Number"
-                className="border rounded px-2 py-1 mr-2"
+                className="border rounded px-2 py-1 mr-2 text-slate-800"
                 required
               />
             </div>
