@@ -26,7 +26,7 @@ const categories = [
 ];
 export default function Home() {
   const router = useRouter();
-  router.push("/listing/new")
+  router.push("/listing/verify")
   return (
     <main className="flex flex-wrap gap-10">
       {categories.map((category, idx) => {
