@@ -19,9 +19,9 @@ import Image from "next/image";
 export default async function HeaderNav() {
   const user = await currentUser();
   return (
-    <div className="flex flex-none h-12 align-middle justify-between mb-10 pt-6 text-sky-500">
+    <div className="flex flex-none h-12 align-middle justify-between mb-20 pt-6 text-sky-500">
       <Link href="/">
-        <h2 className="text-2xl font-bold">Rent Easy</h2>
+        <h2 className="text-2xl font-bold">Rent Easy Roosevelt Island</h2>
       </Link>
       <div className="flex flex-row gap-10">
         <Link href="/listing/verify">
