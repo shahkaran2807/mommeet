@@ -175,7 +175,7 @@ export default function ListItem() {
                 className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
                 id="itemName1"
                 aria-describedby="itemName"
-                placeholder="Enter item name"
+                placeholder="eg. Canon DSLR Camera"
                 ref={itemName}
                 required
               />
@@ -191,7 +191,7 @@ export default function ListItem() {
                 className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
                 id="price1"
                 aria-describedby="price"
-                placeholder="Enter price"
+                placeholder="eg. $500"
                 type="number"
                 ref={itemPrice}
                 required
@@ -215,7 +215,7 @@ export default function ListItem() {
               />{" "}
               / day
               <small className="block" id="listingPrice">
-                Enter price per day for the item
+                Enter rental price per day for the item
               </small>
             </div>
             <div className="p-3">
@@ -279,7 +279,7 @@ export default function ListItem() {
                 />
               </div>
               <small className="block">
-                Please enter the dates when the item will not be available.
+                Please enter the dates when the item will not be available. You can always change them later.
               </small>
             </div>
             <button className="bg-sky-500 text-gray-50 font-bold p-2 rounded my-10">
