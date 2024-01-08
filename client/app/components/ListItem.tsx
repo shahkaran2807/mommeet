@@ -232,9 +232,14 @@ export default function ListItem() {
               >
                 <option>Select Category</option>
                 <option value="electronics">Electronics</option>
-                <option value="kitchen-supplies">Kitchen Supplies</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="school-supplies">School Supplies</option>
+                <option value="kitchen-supplies">Kitchen or other Home Supplies</option>
+                <option value="musical-instruments">Musical Instruments</option>
+                <option value="expensive-clothes">Expensive Clothes</option>
+                <option value="sport-equipments">Sport Equipments</option>
+                <option value="tools">Tools</option>
+                <option value="furniture">Furniture</option>
+                <option value="accessories">Accessories</option>
+                <option value="others">Others</option>
               </select>
               <small className="block" id="categoryHelp">
                 Enter the category of the item
