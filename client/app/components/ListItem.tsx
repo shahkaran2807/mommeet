@@ -73,7 +73,7 @@ export default function ListItem({
         method: "POST",
         body: JSON.stringify(data),
       })
-        .then((res) => { console.log(res, res.json()); return res.json();})
+        .then((res) => { return res.json();})
         .then((resJson) => {
           console.log(resJson)
           console.log("Done");
