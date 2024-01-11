@@ -41,13 +41,7 @@ export async function POST(request: Request) {
       })
     );
 
-    const imagesString = convertToPSQLArray(
-      imageUploadResponse,
-      true,
-      "{",
-      "}",
-      '"'
-    );
+    const imagesString = convertToPSQLArray(imageUploadResponse, true, "{", "}", '"');
     const datesString = convertToPSQLArray(
       unavailable_dates,
       false,
@@ -61,29 +55,9 @@ export async function POST(request: Request) {
     const pgRegUpdate = await client.query(
       `UPDATE sellers SET products = array_append(products, '${generatedUuid}') WHERE user_id = '${seller_user_id}';`
     );
-    return Response.json(
-      { done: true },
-      {
-        status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
-    );
+    return Response.json({ done: true });
   } catch (err) {
     console.log(err);
-    return Response.json(
-      { done: false },
-      {
-        status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
-    );
+    return Response.json({ done: false });
   }
 }

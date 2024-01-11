@@ -23,21 +23,21 @@ export async function POST(request: Request) {
       images.map((image: { dataURL: string; file: File }, idx: number) => {
         return new Promise<void>((resolve, reject) => {
           if (image.dataURL) {
-            imagekit.upload(
-              {
-                file: image.dataURL,
-                fileName: product_id,
-              },
-              (error, result) => {
-                if (error) {
-                  console.log(error);
-                  throw new Error("Error while uploading");
-                } else {
-                  imageUploadResponse[idx] = result.url;
-                  resolve();
+              imagekit.upload(
+                {
+                  file: image.dataURL,
+                  fileName: product_id,
+                },
+                (error, result) => {
+                  if (error) {
+                    console.log(error);
+                    throw new Error("Error while uploading");
+                  } else {
+                    imageUploadResponse[idx] = result.url;
+                    resolve();
+                  }
                 }
-              }
-            );
+              );
           } else {
             resolve();
           }
@@ -45,13 +45,7 @@ export async function POST(request: Request) {
       })
     );
 
-    const imagesString = convertToPSQLArray(
-      imageUploadResponse,
-      true,
-      "{",
-      "}",
-      '"'
-    );
+    const imagesString = convertToPSQLArray(imageUploadResponse, true, "{", "}", '"');
     const datesString = convertToPSQLArray(
       unavailable_dates,
       false,
@@ -62,29 +56,9 @@ export async function POST(request: Request) {
     const pgResInsert = await client.query(
       `UPDATE products SET name = '${name}', price = ${price}, category = '${category}', description = '${description}', seller_user_id = '${seller_user_id}', images = '${imagesString}', listing_price = ${listing_price}, unavailable_dates = '${datesString}' WHERE product_id = '${product_id}'`
     );
-    return Response.json(
-      { done: true },
-      {
-        status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
-    );
+    return Response.json({ done: true });
   } catch (err) {
     console.log(err);
-    return Response.json(
-      { done: false },
-      {
-        status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
-    );
+    return Response.json({ done: false });
   }
 }

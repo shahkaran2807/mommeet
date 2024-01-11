@@ -7,12 +7,5 @@ export async function GET(
   const pgRes = await client.query(
     `SELECT * FROM sellers WHERE user_id = '${params.seller_id}'`
   );
-  return Response.json(pgRes.rows, {
-    status: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
-  });
+  return Response.json(pgRes.rows);
 }
