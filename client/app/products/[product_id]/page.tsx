@@ -77,15 +77,6 @@ export default function Page({ params }: { params: { product_id: string } }) {
 
   return (
     <div>
-      {!isLoading && data && (  
-        <Alert variant="destructive" className={"mb-10 "+(data[0].on_hold ? "" : "hidden")}>
-          <ExclamationTriangleIcon className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>
-            This item is held from listing. You cannot rent is currently.
-          </AlertDescription>
-        </Alert>
-      )}
       <div className="flex flex-col md:flex-row md:gap-12">
         <div className="mb-24 md:w-2/4">
           <Carousel>
@@ -157,15 +148,25 @@ export default function Page({ params }: { params: { product_id: string } }) {
               <small className="block">Please select your rental dates</small>
             </div>
 
-            <div className="container mx-auto my-4">
-              <Button
-                className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold"
-                onClick={handleWhatsAppRedirect}
-                disabled={data[0].on_hold}
+            <Button
+              className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold mt-4"
+              onClick={handleWhatsAppRedirect}
+              disabled={data[0].on_hold}
+            >
+              Request on WhatsApp
+            </Button>
+            {!isLoading && data && (
+              <div
+                className={
+                  "mb-2 mt-1 text-sm text-amber-500 " +
+                  (data[0].on_hold ? "" : "hidden")
+                }
               >
-                Request on WhatsApp
-              </Button>
-            </div>
+                <div>
+                  This item is held from listing. You cannot rent it currently.
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <LoadingSpinner />
