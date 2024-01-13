@@ -1,11 +1,8 @@
 "use client"
-import ImageContext from "@/app/components/ImageContext";
-import { IKImage } from "imagekitio-react";
 import SideBar from "../../../components/SideBar";
-import Link from "next/link";
-import Image from "next/image";
 import useSWR from "swr";
 import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
+import ProductsShowcase from "@/app/components/ProductsShowcase";
 
 const fetcher = (...args: any) =>
   fetch.apply(null, args).then((res) => res.json());
@@ -22,6 +19,7 @@ export type ProductData = {
   images: string[];
   listing_price: number;
   unavailable_dates: string[];
+  on_hold?: boolean;
 };
 
 export default function Page({ params }: { params: { slug: string } }) {
@@ -44,33 +42,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
           <div>
             <p className="pb-6 text-xs">All products</p>
-            <div className="flex gap-10 flex-wrap">
-              {data.map((item: ProductData, idx: number) => {
-                return (
-                  <Link
-                    href={{ pathname: "/products/" + item.product_id }}
-                    key={idx}
-                    className="flex flex-col shrink-0 w-64 md:w-36 hover:text-sky-500 hover:font-bold hover:cursor-pointer"
-                  >
-                    {item.images && (
-                      <Image
-                        className="max-w-3xl max-h-3xl"
-                        src={item?.images[0]}
-                        alt={item.name}
-                        width={240}
-                        height={120}
-                      />
-                    )}
-                    {!item.images && (
-                      <div className="h-36 bg-slate-300 rounded"></div>
-                    )}
-                    <div>{item.name}</div>
-                    <div>{item.product_id}</div>
-                    <div>{"$" + item.price}</div>
-                  </Link>
-                );
-              })}
-            </div>
+            <ProductsShowcase data={data} allowProductEdit={false} />
           </div>
         </div>
       )}

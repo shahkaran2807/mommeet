@@ -52,7 +52,7 @@ export default function ListItem({
           console.log(resJson)
           if (resJson.done) {
             console.log("Done");
-            window.location.reload();
+            router.push("/products/"+data.product_id)
           }
         })
         .catch((err) => console.error(err));

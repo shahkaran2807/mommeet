@@ -22,7 +22,7 @@ export async function GET(
     `'`
   );
   const productsRes = await client.query(
-    `SELECT * FROM products WHERE product_id IN ${sellerProductsString}`
+    `SELECT * FROM products WHERE product_id IN ${sellerProductsString} ORDER BY name ASC`
   );
   return Response.json({ seller: pgRes.rows, products: productsRes.rows });
 }
