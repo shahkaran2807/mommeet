@@ -12,9 +12,10 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
-import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
-import ListItem from "@/app/components/ListItem";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 const fetcher = (...args: any) =>
   fetch.apply(null, args).then((res) => res.json());
@@ -76,6 +77,15 @@ export default function Page({ params }: { params: { product_id: string } }) {
 
   return (
     <div>
+      {!isLoading && data && (  
+        <Alert variant="destructive" className={"mb-10 "+(data[0].on_hold ? "" : "hidden")}>
+          <ExclamationTriangleIcon className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>
+            This item is held from listing. You cannot rent is currently.
+          </AlertDescription>
+        </Alert>
+      )}
       <div className="flex flex-col md:flex-row md:gap-12">
         <div className="mb-24 md:w-2/4">
           <Carousel>
@@ -87,12 +97,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
                       key={image + idx}
                       className="w-96 h-80 rounded border"
                     >
-                      <Image
-                        alt={image}
-                        src={image}
-                        className="object-cover"
-                        fill={true}
-                      />
+                      <img src={image} className="object-cover" />
                     </CarouselItem>
                   );
                 })
@@ -153,13 +158,13 @@ export default function Page({ params }: { params: { product_id: string } }) {
             </div>
 
             <div className="container mx-auto my-4">
-              <button
+              <Button
                 className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold"
                 onClick={handleWhatsAppRedirect}
                 disabled={data[0].on_hold}
               >
                 Request on WhatsApp
-              </button>
+              </Button>
             </div>
           </div>
         ) : (

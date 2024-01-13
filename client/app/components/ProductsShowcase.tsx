@@ -85,41 +85,33 @@ export default function ProductsShowcase({
         return (
           <div key={idx} className="flex flex-col shrink-0 w-90 md:w-64">
             <Card className="w-full hover:font-bold hover:cursor-pointer">
-              <CardHeader>
-                <div className="w-54 h-24 overflow-hidden mb-5">
-                  {item.images && (
-                    <Image
-                      className=""
-                      src={item?.images[0]}
-                      alt={item.name}
-                      width={200}
-                      height={100}
-                    />
+              <Link href={"/products/"+item.product_id}>
+                <CardHeader>
+                  <div className="w-54 h-24 overflow-hidden mb-5">
+                    {item.images && (
+                      <Image
+                        className=""
+                        src={item?.images[0]}
+                        alt={item.name}
+                        width={200}
+                        height={100}
+                      />
+                    )}
+                  </div>
+                  {!item.images && (
+                    <div className="h-36 bg-slate-300 rounded"></div>
                   )}
-                </div>
-                {!item.images && (
-                  <div className="h-36 bg-slate-300 rounded"></div>
-                )}
-                <CardTitle>
-                  <div className="text-xl">{item.name}</div>
-                </CardTitle>
-                <CardDescription>
-                  <div className="text-lg">{"$" + item.listing_price}</div>
-                  <div className="text-sm italic">
-                    Valued at: {"$" + item.price}
-                  </div>
-                </CardDescription>
-              </CardHeader>
-              {/* <CardContent>
-                <div className="grid w-full items-center gap-4">
-                  <div className="flex flex-col space-y-1.5">
-                    <div>Name</div>
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <div>Framework</div>
-                  </div>
-                </div>
-              </CardContent> */}
+                  <CardTitle>
+                    <div className="text-xl">{item.name}</div>
+                  </CardTitle>
+                  <CardDescription>
+                    <div className="text-lg">{"$" + item.listing_price}</div>
+                    <div className="text-sm italic">
+                      Valued at: {"$" + item.price}
+                    </div>
+                  </CardDescription>
+                </CardHeader>
+              </Link>
               {allowProductEdit && (
                 <CardFooter className="flex gap-2 flex-col">
                   <div className="flex gap-2 flex-row items-strech w-full">
