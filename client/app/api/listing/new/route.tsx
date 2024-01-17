@@ -26,7 +26,7 @@ export async function POST(request: Request) {
               file: image.dataURL,
               fileName: generatedUuid,
             },
-            (error, result) => {
+            (error: any, result: any) => {
               if (error) {
                 console.log(error);
                 throw new Error("Error while uploading");

@@ -15,14 +15,19 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
 import Image from "next/image";
+import SearchBox from "./SearchBox";
 
 export default async function HeaderNav() {
   const user = await currentUser();
   return (
     <div className="flex flex-none h-12 align-middle justify-between mb-20 pt-6 text-sky-500">
       <Link href="/">
-        <h2 className="text-2xl font-bold">Rent Easy Roosevelt Island</h2>
+        <h2 className="text-2xl font-bold">Rent Easy</h2>
+        <div>Roosevelt Island</div>
       </Link>
+      <div>
+        <SearchBox />
+      </div>
       <div className="flex flex-row gap-10">
         <Link href="/listing/verify">
           <button className="w-28 hover:text-sky-700">List New Item</button>
