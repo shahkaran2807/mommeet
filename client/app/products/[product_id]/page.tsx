@@ -12,10 +12,8 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
+import { RedirectToSignIn, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 const fetcher = (...args: any) =>
   fetch.apply(null, args).then((res) => res.json());
@@ -55,25 +53,6 @@ export default function Page({ params }: { params: { product_id: string } }) {
   }, [data, isLoading]);
 
   const [selectedDates, setSelectedDates] = useState<Date[]>();
-
-  const handleWhatsAppRedirect = () => {
-    if (isLoaded) {
-      const encodedPhoneNumber = encodeURIComponent(
-        phoneNumber.replace(/[\s\-\[\]()]/g, "")
-      );
-      const message = `Hi! I am ${
-        user.firstName
-      }, I'm interested in renting out your ${
-        data[0].name
-      } for dates ${selectedDates.map(
-        (date) => date.toLocaleString().split(",")[0]
-      )}. Please let me know the best time for pickup. Thanks!`;
-      const chatLink = `https://wa.me/${encodedPhoneNumber}?text=${encodeURIComponent(
-        message
-      )}`;
-      window.location.href = chatLink;
-    }
-  };
 
   return (
     <div>
@@ -150,20 +129,45 @@ export default function Page({ params }: { params: { product_id: string } }) {
 
             <Button
               className="w-full bg-black text-white px-4 py-2 rounded-md font-semibold mt-4"
-              onClick={handleWhatsAppRedirect}
-              disabled={data[0].on_hold}
+              disabled={data[0].on_hold || !selectedDates}
             >
-              Request on WhatsApp
+              {selectedDates && <Link
+                href={{
+                  pathname: "/listing/request",
+                  query: {
+                    productName: data[0].name,
+                    phoneNumber: phoneNumber,
+                    selectedDates: selectedDates.map((date) =>
+                      date.toLocaleString()
+                    ),
+                  },
+                }}
+              >
+                Request On Whatsapp
+              </Link>}
+              {
+                !selectedDates && <div>Request On Whatsapp</div>
+              }
             </Button>
-            {!isLoading && data && (
+            {!isLoading && data && data[0].on_hold && (
               <div
                 className={
-                  "mb-2 mt-1 text-sm text-amber-500 " +
-                  (data[0].on_hold ? "" : "hidden")
+                  "mb-2 mt-1 text-sm text-amber-500 "
                 }
               >
                 <div>
                   This item is held from listing. You cannot rent it currently.
+                </div>
+              </div>
+            )}
+            {!isLoading && data && !data[0].on_hold && !selectedDates && (
+              <div
+                className={
+                  "mb-2 mt-1 text-sm text-amber-500 "
+                }
+              >
+                <div>
+                  Please select dates you want to rent out the item for
                 </div>
               </div>
             )}
