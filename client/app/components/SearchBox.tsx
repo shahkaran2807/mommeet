@@ -62,11 +62,10 @@ export default function SearchBox() {
   return (
     <div className="">
       <AutoComplete
-          popupMatchSelectWidth={200}
+          popupMatchSelectWidth={300}
           options={options as any}
           onSelect={onSelect}
-          style={{ width: 300 }}
-          className=""
+          className="w-full md:w-full"
           notFoundContent="No Products Found"
           size="large"
         >
