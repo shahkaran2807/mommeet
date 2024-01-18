@@ -106,9 +106,10 @@ export default function ProductsShowcase({
                   </CardTitle>
                   <CardDescription>
                     <div className="text-lg">{"$" + item.listing_price}</div>
-                    <div className="text-sm italic">
+                    {/* <div className="text-sm italic">
                       Valued at: {"$" + item.price}
-                    </div>
+                    </div> */}
+                    {item.on_hold?<div className="text-amber-500">Unavailable</div>:<div></div>}
                   </CardDescription>
                 </CardHeader>
               </Link>
