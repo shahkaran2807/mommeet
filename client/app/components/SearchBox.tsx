@@ -66,7 +66,7 @@ export default function SearchBox() {
           options={options as any}
           onSelect={onSelect}
           className="w-full md:w-full"
-          notFoundContent="No Products Found"
+          notFoundContent=""
           size="large"
         >
           <Input.Search

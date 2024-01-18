@@ -38,10 +38,10 @@ export default function Page({ params }: { params: { slug: string } }) {
       ) : (
         <div className="grow flex flex-row">
           <div className="hidden sm:block">
-            <SideBar />
+            {/* <SideBar /> */}
           </div>
           <div>
-            <p className="pb-6 text-xs">All products</p>
+            <p className="pb-6 text-slate-500 text-xl"><b>{url.slice(1)}</b></p>
             <ProductsShowcase data={data} allowProductEdit={false} />
           </div>
         </div>
