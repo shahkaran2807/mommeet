@@ -105,7 +105,7 @@ export default function ProductsShowcase({
                     <div className="text-xl">{item.name}</div>
                   </CardTitle>
                   <CardDescription>
-                    <div className="text-lg">{"$" + item.listing_price}</div>
+                    <div className="text-lg">{"$" + item.listing_price}/day</div>
                     {/* <div className="text-sm italic">
                       Valued at: {"$" + item.price}
                     </div> */}
