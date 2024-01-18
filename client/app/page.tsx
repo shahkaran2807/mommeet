@@ -55,38 +55,38 @@ export default function Home() {
   // const router = useRouter();
   // router.push("/listing/verify")
   return (
-    <main className="flex flex-wrap gap-10">
+    <main className="flex flex-wrap gap-10 lg:gap-15">
       {categories.map((category, idx) => {
         return (
           <Link
             key={category.link + idx}
             href={"/products/category/" + category.link}
           >
-            <div className="flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer md:w-64">
+            <div className="border rounded-lg shadow flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer lg:w-100">
               {/* <div className="h-36 bg-slate-300 rounded"></div> */}
                <img
                 src={category.image}
                 alt={category.description}
-                className="h-36 bg-slate-300 rounded object-cover"
+                className="h-36 bg-slate-300 rounded-t-lg object-cover"
                 width={320}
                 height={180}
               />
-              <div><b>{category.description}</b></div>
+              <div className="text-center text-slate-500"><b>{category.description}</b></div>
             </div>
           </Link>
         );
       })}
       <Link href="/products/category/all">
-        <div className="flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer md:w-64">
+        <div className="border rounded-lg shadow flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer lg:w-100">
           {/* <div className="h-36 bg-slate-300 rounded"></div> */}
           <img
                 src={"/assets/all.jpeg"}
                 alt={"all products"}
-                className="h-36 bg-slate-300 rounded object-cover"
+                className="h-36 bg-slate-300 rounded-t-lg object-cover"
                 width={320}
                 height={180}
               />
-          <div>All</div>
+          <div className="text-center text-slate-500"><b>All</b></div>
         </div>
       </Link>
     </main>
