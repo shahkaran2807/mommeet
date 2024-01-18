@@ -65,7 +65,8 @@ export default function Page({ params }: { params: { product_id: string } }) {
                   return (
                     <CarouselItem
                       key={image + idx}
-                      className="w-96 h-80 rounded border"
+                      // className="w-96 h-80 rounded border"
+                      className="rounded border"
                     >
                       <img src={image} className="object-cover" />
                     </CarouselItem>
@@ -94,7 +95,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
             <div className="text-sm mb-5">
               Original Price: {"$" + data[0].price}
             </div>
-            <div>
+            {/* <div>
               Listed By:{" "}
               <Link
                 href={"/products/seller/" + data[0].seller_user_id}
@@ -102,7 +103,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
               >
                 {data[0].seller_user_id}
               </Link>
-            </div>
+            </div> */}
             <div className="mt-12">
               <div>
                 <Calendar
@@ -167,7 +168,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
                 }
               >
                 <div>
-                  Please select dates you want to rent out the item for
+                  Please select the dates first
                 </div>
               </div>
             )}

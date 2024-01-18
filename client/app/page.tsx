@@ -1,47 +1,54 @@
 "use client";
 import Link from "next/link";
+import Image from 'next/image';
+
 import { useRouter } from "next/navigation";
 
 const categories = [
   {
-    link: "sale",
-    description: "On Sale",
-  },
-  {
     link: "electronics",
     description: "Electronics",
+    image:"/assets/electronics.jpeg",
   },
   {
     link: "kitchen-supplies",
     description: "Kitchen Supplies",
+    image:"/assets/KitchenSupplies.jpeg",
   },
   {
     link: "musical-instruments",
     description: "Musical Instruments",
+    image:"/assets/musicalinstruments.webp",
   },
   {
     link: "expensive-clothes",
-    description: "Expensive Clothes",
+    description: "Clothes",
+    image:"/assets/clothes.jpg",
   },
   {
     link: "sport-equipments",
     description: "Sport Equipments",
+    image:"/assets/sports.jpeg",
   },
   {
     link: "tools",
     description: "Tools",
+    image:"/assets/tools.jpeg",
   },
   {
     link: "furniture",
     description: "Furniture",
+    image:"/assets/furniture.avif",
   },
   {
     link: "accessories",
     description: "Accessories",
+    image:"/assets/accessories.jpeg",
   },
   {
     link: "other",
     description: "Other",
+    image:"/assets/others.png",
   },
 ];
 export default function Home() {
@@ -56,15 +63,29 @@ export default function Home() {
             href={"/products/category/" + category.link}
           >
             <div className="flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer md:w-64">
-              <div className="h-36 bg-slate-300 rounded"></div>
-              <div>{category.description}</div>
+              {/* <div className="h-36 bg-slate-300 rounded"></div> */}
+               <img
+                src={category.image}
+                alt={category.description}
+                className="h-36 bg-slate-300 rounded object-cover"
+                width={320}
+                height={180}
+              />
+              <div><b>{category.description}</b></div>
             </div>
           </Link>
         );
       })}
       <Link href="/products/category/all">
         <div className="flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer md:w-64">
-          <div className="h-36 bg-slate-300 rounded"></div>
+          {/* <div className="h-36 bg-slate-300 rounded"></div> */}
+          <img
+                src={"/assets/all.jpeg"}
+                alt={"all products"}
+                className="h-36 bg-slate-300 rounded object-cover"
+                width={320}
+                height={180}
+              />
           <div>All</div>
         </div>
       </Link>
