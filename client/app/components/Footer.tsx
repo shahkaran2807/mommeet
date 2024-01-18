@@ -43,9 +43,9 @@ export default function Footer() {
   };
 
   return (
-    <div className="bg-black text-white py-4 mt-auto">
+    <div className="bg-black text-white py-4 mt-5 w-full">
       <div className="container mx-auto flex flex-col items-center">
-        <nav className="flex space-x-6 mb-4">
+        <nav className="flex mb-4">
           <Link href="/aboutus" className="hover:text-gray-300">
             About Us
           </Link>
