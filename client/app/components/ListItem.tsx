@@ -332,7 +332,7 @@ export default function ListItem({
                 Please enter the dates when the item will not be available.
               </small>
             </div>
-            <p><i>Don't scratch your head too much on this. You can always change all of these settings later by clicking on 'My Listings' from the top-right dropdown</i></p>
+            <p><i>Don't scratch your head too much on this. You can always change all of these settings later by clicking on My Listings from the top-right dropdown</i></p>
             <button className="bg-sky-500 text-gray-50 font-bold p-2 rounded my-10">
               Submit
             </button>

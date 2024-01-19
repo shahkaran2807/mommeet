@@ -31,16 +31,16 @@ export default function Page({ params }: { params: { seller_id: string } }) {
         <LoadingSpinner />
       ) : (
         <div className="grow flex flex-row">
-          <div className="hidden sm:block">
+          {/* <div className="hidden sm:block">
             <SideBar />
-          </div>
+          </div> */}
           <div>
             {data.error ? (
               <div>{data.error}</div>
             ) : (
               <div>
-                <p className="pb-6 text-xs">
-                  {data.seller[0].name}&apos;s products
+                <p className="pb-6 text-lg text-slate-500">
+                  <b>{data.seller[0].name}&apos;s products</b>
                 </p>
                 <ProductsShowcase data={data.products} allowProductEdit={editFlag} dataAPISource={dataSource} />
               </div>

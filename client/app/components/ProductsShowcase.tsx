@@ -79,15 +79,23 @@ export default function ProductsShowcase({
       });
   };
 
+  function truncateString(str: string, maxLength: number) {
+    if (str.length > maxLength) {
+      return str.substring(0, maxLength) + '...';
+    } else {
+      return str;
+    }
+  }
+
   return (
     <div className="flex gap-10 flex-wrap">
       {data.map((item: ProductData, idx: number) => {
         return (
           <div key={idx} className="flex flex-col shrink-0 w-90 md:w-64">
-            <Card className="w-full hover:font-bold hover:cursor-pointer">
+            <Card className="w-full h-full hover:font-bold  hover:cursor-pointer">
               <Link href={"/products/"+item.product_id}>
                 <CardHeader>
-                  <div className="w-54 h-24 overflow-hidden mb-5">
+                  <div className="w-54 h-48 overflow-hidden mb-5">
                     {item.images && (
                       <Image
                         className=""
@@ -102,7 +110,7 @@ export default function ProductsShowcase({
                     <div className="h-36 bg-slate-300 rounded"></div>
                   )}
                   <CardTitle>
-                    <div className="text-xl">{item.name}</div>
+                    <div className="text-xl">{truncateString(item.name,30)}</div>
                   </CardTitle>
                   <CardDescription>
                     <div className="text-lg">{"$" + item.listing_price}/day</div>
