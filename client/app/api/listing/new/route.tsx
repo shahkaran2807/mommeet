@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       '"'
     );
     const pgResInsert = await client.query(
-      `INSERT INTO products(name, price, category, description, seller_user_id, product_id, images, listing_price, unavailable_dates) VALUES ('${name}', ${price}, '${category}', '${description}', '${seller_user_id}', '${generatedUuid}', '${imagesString}', ${listing_price}, '${datesString}')`
+      `INSERT INTO products(name, price, category, description, seller_user_id, product_id, images, listing_price, unavailable_dates) VALUES ('${name}', ${price??0}, '${category}', '${description}', '${seller_user_id}', '${generatedUuid}', '${imagesString}', ${listing_price}, '${datesString}')`
     );
     const pgRegUpdate = await client.query(
       `UPDATE sellers SET products = array_append(products, '${generatedUuid}') WHERE user_id = '${seller_user_id}';`

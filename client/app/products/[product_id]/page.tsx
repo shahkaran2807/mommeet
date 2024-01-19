@@ -93,7 +93,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
               {"$" + data[0].listing_price + "/day"}
             </div>
             <div className="text-sm mb-5">
-              Original Price: {"$" + data[0].price}
+              Original Price: {data[0].price!=0 ? "$"+data[0].price:"N/A"}
             </div>
             {/* <div>
               Listed By:{" "}
@@ -161,7 +161,20 @@ export default function Page({ params }: { params: { product_id: string } }) {
                 </div>
               </div>
             )}
-            {!isLoading && data && !data[0].on_hold && !selectedDates && (
+
+            {!isLoading && data && data[0].on_rent && (
+              <div
+                className={
+                  "mb-2 mt-1 text-sm text-amber-500 "
+                }
+              >
+                <div>
+                  This item is currently unavailable as it has been rented out
+                </div>
+              </div>
+            )}
+
+            {!isLoading && data && !data[0].on_hold && !data[0].on_rent && !selectedDates && (
               <div
                 className={
                   "mb-2 mt-1 text-sm text-amber-500 "

@@ -30,10 +30,11 @@ export default function ListItem({
     if (product_details) {
       // Send fetch to update route instead of new listing route
       // If the image has a dataURL property, then
+      
       const data = {
         product_id: product_details.product_id,
         name: itemName.current.value,
-        price: itemPrice.current.value,
+        price: itemPrice.current.value??0,
         category: itemCategory.current.value,
         seller_user_id: user.id,
         description: itemDescription.current.value,
@@ -59,7 +60,7 @@ export default function ListItem({
     } else {
       const data = {
         name: itemName.current.value,
-        price: itemPrice.current.value,
+        price: itemPrice.current.value??0,
         category: itemCategory.current.value,
         seller_user_id: user.id,
         description: itemDescription.current.value,
@@ -78,7 +79,10 @@ export default function ListItem({
           console.log(resJson)
           console.log("Done");
           // router.push("/products/seller/"+user.id+"/")
-          router.push("/thankyou");
+          if(resJson.done)
+          {
+            router.push("/thankyou");
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -106,7 +110,7 @@ export default function ListItem({
   useEffect(() => {
     if (product_details) {
       itemName.current.value = product_details.name;
-      itemPrice.current.value = product_details.price;
+      itemPrice.current.value = product_details.price??0;
       itemListingPrice.current.value = product_details.listing_price;
       itemCategory.current.value = product_details.category;
       itemDescription.current.value = product_details.description;

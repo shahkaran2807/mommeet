@@ -20,6 +20,7 @@ export type ProductData = {
   listing_price: number;
   unavailable_dates: string[];
   on_hold?: boolean;
+  on_rent?: boolean;
 };
 
 export default function Page({ params }: { params: { slug: string } }) {
