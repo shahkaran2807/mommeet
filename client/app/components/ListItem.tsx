@@ -217,7 +217,7 @@ export default function ListItem({
           <form onSubmit={itemListFormSubmit}>
             <div className="p-3">
               <label className="block" htmlFor="itemName1">
-                Item Name
+                Item Name *
               </label>
               <input
                 className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
@@ -242,7 +242,7 @@ export default function ListItem({
                 placeholder="eg. $500"
                 type="number"
                 ref={itemPrice}
-                required
+                
               />
               <small className="block" id="price">
                 Enter the original retail price of item
@@ -250,7 +250,7 @@ export default function ListItem({
             </div>
             <div className="p-3">
               <label className="block" htmlFor="listingPrice1">
-                Listing Price
+                Listing Price *
               </label>
               <input
                 className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
@@ -268,7 +268,7 @@ export default function ListItem({
             </div>
             <div className="p-3">
               <label className="block" htmlFor="category1">
-                Category
+                Category *
               </label>
               <select
                 className="my-2 h-10 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
@@ -297,7 +297,7 @@ export default function ListItem({
             </div>
             <div className="p-3">
               <label className="block" htmlFor="itemDescription1">
-                Item Description
+                Item Description *
               </label>
               <textarea
                 className="my-2 h-20 w-80 p-2 border-2 border-slate-300 focus:outline-none focus:border-sky-500"
@@ -329,10 +329,10 @@ export default function ListItem({
                 />
               </div>
               <small className="block">
-                Please enter the dates when the item will not be available. You
-                can always change them later.
+                Please enter the dates when the item will not be available.
               </small>
             </div>
+            <p><i>Don't scratch your head too much on this. You can always change all of these settings later by clicking on 'My Listings' from the top-right dropdown</i></p>
             <button className="bg-sky-500 text-gray-50 font-bold p-2 rounded my-10">
               Submit
             </button>
