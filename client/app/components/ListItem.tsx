@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { Icons } from "@/components/ui/icons";
 import { ProductData } from "../products/category/[slug]/page";
+import Link from "next/link";
 
 type UploadImageResponse = {
   fileId: string;
@@ -131,7 +132,7 @@ export default function ListItem({
   if (isLoaded) {
     return (
       <div>
-        <div>Listing new item</div>
+        <div><p><Link href="/aboutus" className="hover:text-gray-300 text-blue-600">How renting works?</Link></p></div>
         <div>
           <ImageUploading
             multiple
@@ -337,9 +338,12 @@ export default function ListItem({
               </small>
             </div>
             <p><i>Dont scratch your head too much on this. You can always change all of these settings later by clicking on My Listings from the top-right dropdown</i></p>
+           
             <button className="bg-sky-500 text-gray-50 font-bold p-2 rounded my-10">
               Submit
             </button>
+
+            <p><Link href="/aboutus" className="hover:text-gray-300 text-blue-600">How renting works?</Link></p>
           </form>
         </div>
       </div>
