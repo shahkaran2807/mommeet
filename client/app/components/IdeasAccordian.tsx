@@ -1,10 +1,8 @@
 "use client"
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useState } from 'react';
 
 
-export default function IdeasAccordian() {
+export default function IdeasAccordian({ openAccordion }: { openAccordion?: boolean }) {
     const categories = [
         {
           name: "Electronics",
@@ -96,16 +94,17 @@ export default function IdeasAccordian() {
           ]
         }
       ];
-
       
+      const headerId = "what-to-rent-header";
+
       const [openCategory, setOpenCategory] = useState(null);
       const [openItem, setOpenItem] = useState<any>({});
-      const [isIdeasOpen, setIsIdeasOpen] = useState(false);
+      const [isIdeasOpen, setIsIdeasOpen] = useState(!!openAccordion);
 
   return (
         <div>
         <div className="">
-        <div className="cursor-pointer hover:text-gray-300 text-blue-600" onClick={() => setIsIdeasOpen(!isIdeasOpen)}>
+        <div className="cursor-pointer hover:text-gray-300 text-blue-600" onClick={() => setIsIdeasOpen(!isIdeasOpen)} id={headerId}>
             Confused what to rent?
         </div>
         <div className={isIdeasOpen ? 'block' : 'hidden'}>

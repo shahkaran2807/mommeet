@@ -18,7 +18,7 @@ export default function AboutUs() {
         we&apos;re thrilled to introduce our first prototype with the main goal of fostering a community of sharing and accessibility.</p>
 
         <br></br>
-        <IdeasAccordian></IdeasAccordian>
+        <IdeasAccordian openAccordion={true}></IdeasAccordian>
         <br></br>
 
         <h1 className="text-3xl"><b>How does it work?</b></h1>  
