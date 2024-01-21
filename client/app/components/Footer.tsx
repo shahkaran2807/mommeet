@@ -43,8 +43,8 @@ export default function Footer() {
 
   return (
     <div className="bg-black text-white py-4 mt-5 w-full">
-      <div className="container mx-auto flex flex-row items-center justify-center">
-        <nav className="flex flex-col mb-4 pr-24 text-gray-300">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
+        <nav className="flex flex-col text-center items-center mb-4 md:pr-24 text-gray-300">
           <Link href="/aboutus" className="hover:text-gray-300">
             About Us
           </Link>
