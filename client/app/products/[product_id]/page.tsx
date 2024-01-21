@@ -22,6 +22,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
   const { isSignedIn, user, isLoaded } = useUser();
 
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [mailId, setMailId] = useState("");
 
   const { data, error, isLoading, isValidating } = useSWR<ProductData[]>(
     `/api/product/` + params.product_id,
@@ -42,6 +43,7 @@ export default function Page({ params }: { params: { product_id: string } }) {
           );
           const result = await response.json();
           setPhoneNumber(result[0].phonenumber);
+          setMailId(result[0].email)
         } catch (error) {
           // Handle any errors from the second request
           console.error("Error in seller request:", error);
@@ -137,17 +139,17 @@ export default function Page({ params }: { params: { product_id: string } }) {
                   pathname: "/listing/request",
                   query: {
                     productName: data[0].name,
-                    phoneNumber: phoneNumber,
+                    mailId: mailId,
                     selectedDates: selectedDates.map((date) =>
                       date.toLocaleString()
                     ),
                   },
                 }}
               >
-                Request On Whatsapp
+                Request over Email
               </Link>}
               {
-                !selectedDates && <div>Request On Whatsapp</div>
+                !selectedDates && <div>Request over Email</div>
               }
             </Button>
             {!isLoading && data && data[0].on_hold && (

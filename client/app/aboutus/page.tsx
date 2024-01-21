@@ -25,8 +25,8 @@ export default function AboutUs() {
         <br></br>
         <p><b>Owner:</b> You have have an asset lying idle in your home eg. Camera, Bicycle, Projector, you can upload it on our platform for free. 
         Click on &apos;List New Item&apos; on top right of the page to register as a owner and start listing your items. You will have to provide
-        your WhatsApp number, Address and Email to register as a owner. If someone wishes to rent out the products that you have listed, you will
-        be reached out by them, on your provided WhatsApp number.</p>
+        your phone number, Address and Email to register as a owner. If someone wishes to rent out the products that you have listed, you will
+        be reached out by them over your provided email id.</p>
         <p>While handing over the product make sure that the renter/customer is trustworthy and we recommend asking their address and phone number. 
         Once you have handed over your product, go to My Listings Page by clicking on the profile icon at the top right of your screen, and mark 
         the product as rented and make those dates unavailable by clicking on the edit option.</p>
