@@ -43,11 +43,13 @@ export default function AboutUs() {
 
         <h1 className="text-3xl"><b>This is our first prototype</b></h1>
         <br></br>
-        <p>You might be wondering, &apos;oh! what a crappy looking website without any features!&apos; - we understand it!
-        This is just our first prototype we have built with the only goal to gauge the product-market fit, validate our idea and talk to customers.
-        As of now, we would are limiting to people only on Roosevelt island, we are not a registered company, we are not providing any protection, payment
-        and delivery facilitation and are not responsible for any damage/loss incurred during the rent. We are aware that all of these things are crucial to
-        build upon trust and we will soon implement it in the future.</p>
+        <p>
+        You might be thinking of this product as too basic with only a few features - and we get it! This is simply our initial prototype - the start of something big, created with the sole 
+        purpose of assessing product-market fit, validating our idea, and engaging with customers. Currently, our service is restricted to individuals on Roosevelt 
+        Island, and we want to clarify that we are not a registered company. We do not offer protection, payment processing, or delivery facilitation at this stage, 
+        and we cannot be held responsible for any damage or loss incurred during a rental. We recognize the importance of these elements for building trust, and we 
+        plan to incorporate them in the future.
+        </p>
 
         <br></br>
 
