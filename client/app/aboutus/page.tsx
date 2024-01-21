@@ -1,4 +1,5 @@
 import Link from "next/link";
+import IdeasAccordian from "../components/IdeasAccordian";
 
 export default function AboutUs() {
     return (
@@ -16,6 +17,8 @@ export default function AboutUs() {
         Founded by a passionate group of Cornell Tech students situated on the Roosevelt Island, 
         we&apos;re thrilled to introduce our first prototype with the main goal of fostering a community of sharing and accessibility.</p>
 
+        <br></br>
+        <IdeasAccordian></IdeasAccordian>
         <br></br>
 
         <h1 className="text-3xl"><b>How does it work?</b></h1>  

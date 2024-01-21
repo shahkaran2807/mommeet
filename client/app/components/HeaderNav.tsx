@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import SearchBox from "./SearchBox";
+import IdeasAccordian from "./IdeasAccordian";
 
 export default async function HeaderNav() {
   const user = await currentUser();
@@ -80,6 +81,7 @@ export default async function HeaderNav() {
       <div className="block mb-5 lg:hidden lg:mb-0">
         <SearchBox />
       </div>
+      
     </div>
   );
 }

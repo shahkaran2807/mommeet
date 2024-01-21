@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import HeaderNav from "./components/HeaderNav";
 import Footer from "./components/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import IdeasAccordian from "./components/IdeasAccordian";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,10 @@ export default function RootLayout({
             {children}
           </div>
           <Toaster />
+          {/* <div className="flex flex-col px-8 sm:px-36">
+          <IdeasAccordian/>
+          </div> */}
+         
           <Footer/>
         </body>
       </html>

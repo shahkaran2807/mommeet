@@ -7,6 +7,7 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import { Icons } from "@/components/ui/icons";
 import { ProductData } from "../products/category/[slug]/page";
 import Link from "next/link";
+import IdeasAccordian from "./IdeasAccordian";
 
 type UploadImageResponse = {
   fileId: string;
@@ -133,6 +134,10 @@ export default function ListItem({
     return (
       <div>
         <div><p><Link href="/aboutus" className="hover:text-gray-300 text-blue-600">How renting works?</Link></p></div>
+        <br></br>
+        <div>
+          <IdeasAccordian></IdeasAccordian>
+        </div>
         <div>
           <ImageUploading
             multiple
