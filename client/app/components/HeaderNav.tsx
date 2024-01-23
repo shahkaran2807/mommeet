@@ -23,10 +23,10 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import SearchBox from "./SearchBox";
-import IdeasAccordian from "./IdeasAccordian";
 
 export default async function HeaderNav() {
   const user = await currentUser();
+
   return (
     <div>
       <div className="flex flex-none align-middle justify-between mb-3 lg:mb-10 pt-6 text-sky-500">

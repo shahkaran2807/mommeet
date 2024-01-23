@@ -116,7 +116,7 @@ export default function ProductsShowcase({
 
   return (
     <div className="flex md:gap-10 flex-wrap justify-center">
-      {data.map((item: ProductData, idx: number) => {
+      {data && data.map((item: ProductData, idx: number) => {
         return (
           <div key={idx} className="flex flex-col shrink-0 w-1/2 md:w-64">
             <Card className="w-full h-full hover:font-bold  hover:cursor-pointer">
