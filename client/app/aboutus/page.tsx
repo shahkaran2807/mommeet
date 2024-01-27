@@ -9,10 +9,10 @@ export default function AboutUs() {
         <h1 className="text-3xl"><b>About</b></h1>   
         <br></br>     
         <p>Welcome to RentEasy, A peer-to-peer marketplace to rent (almost) anything!
-        Think of it as Airbnb for (almost) anything and everything!
+        Think of it as Airbnb for (almost) anything!
         People owning idle assets like Camera, Bicycle, Projector can upload their products
         on our platform and people needing temporary access to these items can rent them out here. 
-        In this way owner can earn passive income on their idle assets, and people needing temporary access 
+        In this way owner can earn on their idle assets, and people needing temporary access 
         to these items wont need to buy them, instead just rent it out and save money.
         Founded by a passionate group of Cornell Tech students situated on the Roosevelt Island, 
         we&apos;re thrilled to introduce our first prototype with the main goal of fostering a community of sharing and accessibility.</p>
@@ -34,7 +34,7 @@ export default function AboutUs() {
         available again and change the dates to available.</p>
         <br></br>
        <p><b>Customer/renter:</b> If you need temporary access to an asset eg. a DSLR Camera for a holiday trip, you can reach out to people in your neighborhood
-        having those items, via our platform. Once you request for a product, you will automatically be redirected to WhatsApp with a pre written message.</p>
+        having those items, via our platform. Once you request for a product, you will automatically be redirected to your email with a pre written message.</p>
         <p>When you go to pickup the product please make sure the product is functioning properly</p>
         <p>During your rental period please make sure to handle the product carefully and in case of damage/loss/theft you will be responsible to pay the full amount
          of the product to the owner. </p>
