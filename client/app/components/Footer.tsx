@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -9,14 +9,14 @@ export default function Footer() {
     // Implement form submission logic here
     // You can access the form values using the form's name attributes
     const formData = new FormData(e.target);
-    const email = formData.get('email');
-    const phoneNumber = formData.get('phoneNumber');
-    const feedback = formData.get('feedback');
+    const email = formData.get("email");
+    const phoneNumber = formData.get("phoneNumber");
+    const feedback = formData.get("feedback");
 
     // For demonstration purposes, you can log the values to the console
-    console.log('Email:', email);
-    console.log('Phone Number:', phoneNumber);
-    console.log('Feedback:', feedback);
+    console.log("Email:", email);
+    console.log("Phone Number:", phoneNumber);
+    console.log("Feedback:", feedback);
 
     const data = {
       email: email,
@@ -29,31 +29,39 @@ export default function Footer() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then((res) => res.json()).then((res) => {
-      if(res.done)
-      {
-        router.push("/thankyou")
-        e.target.reset();
-      }
-      else{
-        window.alert('Error. Please try again')
-      }
     })
-    
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.done) {
+          router.push("/thankyou");
+          e.target.reset();
+        } else {
+          window.alert("Error. Please try again");
+        }
+      });
   };
 
   return (
     <div className="bg-black text-white py-4 mt-5 w-full">
-      <div className="container mx-auto flex flex-col items-center">
-        <nav className="flex mb-4">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
+        <nav className="flex flex-col text-center items-center mb-4 md:pr-24 text-gray-300">
           <Link href="/aboutus" className="hover:text-gray-300">
             About Us
           </Link>
-
+          <Link href="/aboutus#contact-us" className="hover:text-gray-300">
+            Contact Us
+          </Link>
+          <Link
+            href={"/aboutus#what-to-rent-header"}
+            className="hover:text-gray-300"
+          >
+            Confused what to rent?
+          </Link>
         </nav>
 
         <form onSubmit={handleSubmit} className="w-full sm:w-auto">
-          <div className="mb-2 flex flex-col sm:flex-row">
+          <span className="font-bold">Please provide your valuable feedback:</span>
+          <div className="mb-2 mt-5 flex flex-col sm:flex-row">
             <div className="flex flex-col">
               <label htmlFor="email" className="mr-2 text-xs">
                 Email:
