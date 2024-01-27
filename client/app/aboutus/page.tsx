@@ -55,21 +55,14 @@ export default function AboutUs() {
 
         <h1 className="text-3xl"><b>Contact Us</b></h1>
         <br></br>
-        <p><b>Karan Shah (Meng CS student at Cornell Tech)</b></p>
-        <p>Email: shahkaran2807@gmail.com</p>
+        {/* <p><b>Karan Shah (Meng CS student at Cornell Tech)</b></p> */}
+        <p>Email: ks2349@cornell.edu</p>
         <p>Mobile: +19295229890</p>
         <p>
             <Link href="https://wa.me/+19295229890" className="text-blue-500 underline hover:text-blue-700">
                 Chat on Whatsapp
             </Link>
         </p>
-        <br></br>
-        <p><b>Lakshit Dua (Meng CS student at Cornell Tech)</b></p>
-        <p>Email: lakshit99@gmail.com</p>
-        <p>Mobile: +19144699641</p>
-        <Link href="https://wa.me/+19144699641" className="text-blue-500 underline hover:text-blue-700">
-                Chat on Whatsapp
-        </Link>
      </div>
     )
   }
