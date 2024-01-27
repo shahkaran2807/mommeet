@@ -53,7 +53,7 @@ export default function AboutUs() {
 
         <br></br>
 
-        <h1 className="text-3xl"><b>Contact Us</b></h1>
+        <h1 className="text-3xl" id="contact-us"><b>Contact Us</b></h1>
         <br></br>
         <p><b>Karan Shah (Meng CS student at Cornell Tech)</b></p>
         <p>Email: shahkaran2807@gmail.com</p>

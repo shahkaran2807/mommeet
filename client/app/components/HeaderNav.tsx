@@ -28,11 +28,10 @@ export default async function HeaderNav() {
   const user = await currentUser();
 
   return (
-    <div>
-      <div className="flex flex-none align-middle justify-between mb-3 lg:mb-10 pt-6 text-sky-500">
+    <div className="mb-10">
+      <div className="flex flex-none align-middle justify-between mb-3 pt-6 text-sky-500">
         <Link href="/">
           <h2 className="text-xl lg:text-2xl font-bold">Rent Easy</h2>
-          <div>Roosevelt Island</div>
         </Link>
         <div className="hidden lg:block lg:flex-grow lg:mx-5">
           <SearchBox />
@@ -81,7 +80,23 @@ export default async function HeaderNav() {
       <div className="block mb-5 lg:hidden lg:mb-0">
         <SearchBox />
       </div>
-      
+      <div className="flex lg:flex-row flex-col lg:gap-10 text-sky-500 bg-gray-100 p-3 justify-center items-center">
+        <Link href="/aboutus#how-does-it-work">
+          How Does RentEasy Work?
+        </Link>
+        <Link href="/aboutus" className="hover:text-gray-300">
+          About Us
+        </Link>
+        <Link href="/aboutus#contact-us" className="hover:text-gray-300">
+          Contact Us
+        </Link>
+        <Link
+          href={"/aboutus#what-to-rent-header"}
+          className="hover:text-gray-300"
+        >
+          Confused what to rent?
+        </Link>
+      </div>
     </div>
   );
 }
