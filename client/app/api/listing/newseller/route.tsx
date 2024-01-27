@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   if (name === "") name = username;
   try {
     const pgRes = await client.query(
-      `INSERT INTO sellers(name, email, user_id, username, phonenumber, address) VALUES ('${name}', '${email}', '${user_id}', '${username}', '${phonenumber}', '${address}')`
+      `INSERT INTO sellers(name, email, user_id, username, phonenumber, address) VALUES ($$${name}$$, $$${email}$$, '${user_id}', $$${username}$$, $$${phonenumber}$$, $$${address}$$)`
     );
     return Response.json({ done: true });
   } catch (err) {
