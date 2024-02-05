@@ -13,7 +13,7 @@ const categories = [
   {
     link: "kitchen-supplies",
     description: "Kitchen Supplies",
-    image:"/assets/KitchenSupplies.jpeg",
+    image:"/assets/KitchenSupplies.png",
   },
   {
     link: "musical-instruments",
@@ -44,11 +44,6 @@ const categories = [
     link: "accessories",
     description: "Accessories",
     image:"/assets/accessories.jpeg",
-  },
-  {
-    link: "other",
-    description: "Other",
-    image:"/assets/others.png",
   },
 ];
 export default function Home() {
