@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   try {
     const pgResInsert = await client.query(
-      `INSERT INTO feedback(email, phonenumber, feedback) VALUES ('${email}', '${phoneNumber}', '${feedback}')`
+      `INSERT INTO feedback(email, phonenumber, feedback) VALUES ($$${email}$$, $$${phoneNumber}$$, $$${feedback}$$)`
     );
     return Response.json({ done: true });
   } catch (err) {
