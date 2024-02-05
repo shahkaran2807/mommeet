@@ -158,9 +158,9 @@ export default function ListItem({
               <div>
                 <div className="flex flex-col items-center w-full p-3 gap-2">
                   <div className="text-slate-500">
-                    Click or Drag and Drop Images below to upload
                   </div>
-                  <div className="flex flex-row gap-10 border-2 border-sky-500 overflow-x-auto p-5 h-[180px] w-full rounded">
+                  <div className="border-2 border-sky-500 w-full">
+                  <div className="flex flex-row gap-10 overflow-x-auto p-5 h-[180px] w-full rounded">
                     {uploadedImages.length > 0 ? (
                       imageList.map((image, index) => (
                         <div key={index} className="w-40 h-24">
@@ -198,12 +198,12 @@ export default function ListItem({
                       ))
                     ) : (
                       <div className="h-full w-full text-center text-slate-500">
-                        Upload images here
+                        {/* Upload images here */}
                       </div>
                     )}
                   </div>
                   <button
-                    className="border-2 border-sky-500 w-full h-[300px] justify-center flex flex-row text-slate-500 items-center gap-2"
+                    className="w-full h-[300px] justify-center flex flex-row text-slate-500 items-center gap-2"
                     style={isDragging ? { color: "red" } : undefined}
                     ref={imageUploaderRef}
                     {...dragProps}
@@ -215,10 +215,11 @@ export default function ListItem({
                           "h-6 w-6 bg-slate-50 rounded-full text-slate-500",
                       })}
                     </span>
-                    <span>Drag and Drop Here</span>
+                    <span>Upload/Drag-Drop yoiur product images here</span>
                   </button>
+                  </div>
                 </div>
-                <button onClick={onImageRemoveAll}>Remove all images</button>
+                {/* <button onClick={onImageRemoveAll}>Remove all images</button> */}
               </div>
             )}
           </ImageUploading>
