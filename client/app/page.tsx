@@ -6,44 +6,24 @@ import { useRouter } from "next/navigation";
 
 const categories = [
   {
-    link: "electronics",
-    description: "Electronics",
-    image:"/assets/electronics.jpeg",
+    link: "strollers",
+    description: "Strollers",
+    image:"/assets/strollers.png",
   },
   {
-    link: "kitchen-supplies",
-    description: "Kitchen Supplies",
-    image:"/assets/KitchenSupplies.png",
+    link: "gear",
+    description: "Baby Gear",
+    image:"/assets/gear.png",
   },
   {
-    link: "musical-instruments",
-    description: "Musical Instruments",
-    image:"/assets/musicalinstruments.webp",
-  },
-  {
-    link: "expensive-clothes",
-    description: "Clothes",
-    image:"/assets/clothes.jpg",
-  },
-  {
-    link: "sport-equipments",
-    description: "Sport Equipments",
-    image:"/assets/sports.jpeg",
-  },
-  {
-    link: "tools",
-    description: "Tools",
-    image:"/assets/tools.jpeg",
-  },
-  {
-    link: "furniture",
-    description: "Furniture",
-    image:"/assets/furniture.avif",
+    link: "clothes",
+    description: "clothes",
+    image:"/assets/clothes.png",
   },
   {
     link: "accessories",
     description: "Accessories",
-    image:"/assets/accessories.jpeg",
+    image:"/assets/accessories.png",
   },
 ];
 export default function Home() {
@@ -57,23 +37,23 @@ export default function Home() {
             key={category.link + idx}
             href={"/products/category/" + category.link}
           >
-            <div className="border rounded-lg shadow flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer lg:w-100">
+            {/* <div className="flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer lg:w-100"> */}
               {/* <div className="h-36 bg-slate-300 rounded"></div> */}
                <img
                 src={category.image}
                 alt={category.description}
-                className="h-36 bg-slate-300 rounded-t-lg object-cover"
+                // className="h-36 bg-slate-300 rounded-t-lg object-cover"
                 width={320}
                 height={180}
               />
-              <div className="text-center text-slate-500"><b>{category.description}</b></div>
-            </div>
+              {/* <div className="text-center text-slate-500"><b>{category.description}</b></div> */}
+            {/* </div> */}
           </Link>
         );
       })}
-      <Link href="/products/category/all">
+      {/* <Link href="/products/category/all">
         <div className="border rounded-lg shadow flex flex-col w-80 hover:text-sky-500 hover:font-bold hover:cursor-pointer lg:w-100">
-          {/* <div className="h-36 bg-slate-300 rounded"></div> */}
+          <div className="h-36 bg-slate-300 rounded"></div>
           <img
                 src={"/assets/all.jpeg"}
                 alt={"all products"}
@@ -83,7 +63,8 @@ export default function Home() {
               />
           <div className="text-center text-slate-500"><b>All</b></div>
         </div>
-      </Link>
+      </Link> */}
+      
     </main>
   );
 }

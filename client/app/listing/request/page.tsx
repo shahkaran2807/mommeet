@@ -37,7 +37,7 @@ export default function Page() {
         user.firstName
       }, I'm interested in renting out your ${
         productName
-      } via RentEasy for dates ${selectedDates.map(
+      } via MomMeet for dates ${selectedDates.map(
         (date) => date.split(",")[0]
       )}. Please let me know the best time for pickup. Thanks!`;
       const chatLink = `mailto:${mailId}?subject=RentEasy:Request for ${productName}&body=${message}`;

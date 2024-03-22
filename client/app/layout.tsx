@@ -10,7 +10,7 @@ import IdeasAccordian from "./components/IdeasAccordian";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RentEasy",
+  title: "MomMeet",
   description: "Your ultimate marketplace to rent anything!",
 };
 

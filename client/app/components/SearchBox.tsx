@@ -88,7 +88,7 @@ export default function SearchBox() {
         size="large"
       >
         <Input.Search
-          placeholder="Search RentEasy"
+          placeholder="Search"
           onChange={(e) => {
             debouncedOnChange();
             setSearchInputValue(e.target.value);

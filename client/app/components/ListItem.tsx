@@ -294,7 +294,7 @@ export default function ListItem({
                 <option value="kitchen-supplies">
                   Kitchen or other Home Supplies
                 </option>
-                <option value="musical-instruments">Musical Instruments</option>
+                <option value="strollers">Strollers</option>
                 <option value="expensive-clothes">Expensive Clothes</option>
                 <option value="sport-equipments">Sport Equipments</option>
                 <option value="tools">Tools</option>
