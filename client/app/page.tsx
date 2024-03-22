@@ -12,7 +12,7 @@ const categories = [
   },
   {
     link: "gear",
-    description: "Baby Gear",
+    description: "gear",
     image:"/assets/gear.png",
   },
   {
