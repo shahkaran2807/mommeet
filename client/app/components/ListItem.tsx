@@ -295,7 +295,7 @@ export default function ListItem({
                   Kitchen or other Home Supplies
                 </option>
                 <option value="strollers">Strollers</option>
-                <option value="gear">Baby Gear</option>
+                <option value="baby-gear">Baby Gear</option>
                 <option value="clothes">Clothes</option>
                 <option value="accessories">Accessories</option>
                 {/* <option value="furniture">Furniture</option>

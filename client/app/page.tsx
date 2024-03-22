@@ -11,8 +11,8 @@ const categories = [
     image:"/assets/strollers.png",
   },
   {
-    link: "gear",
-    description: "gear",
+    link: "baby-gear",
+    description: "baby-gear",
     image:"/assets/gear.png",
   },
   {
