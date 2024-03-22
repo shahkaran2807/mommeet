@@ -295,12 +295,12 @@ export default function ListItem({
                   Kitchen or other Home Supplies
                 </option>
                 <option value="strollers">Strollers</option>
-                <option value="expensive-clothes">Expensive Clothes</option>
-                <option value="sport-equipments">Sport Equipments</option>
-                <option value="tools">Tools</option>
-                <option value="furniture">Furniture</option>
+                <option value="baby-gear">Baby Gear</option>
+                <option value="clothes">Clothes</option>
                 <option value="accessories">Accessories</option>
-                <option value="others">Others</option>
+                {/* <option value="furniture">Furniture</option>
+                <option value="accessories">Accessories</option>
+                <option value="others">Others</option> */}
               </select>
               <small className="block" id="categoryHelp">
                 Enter the category of the item
